@@ -1,7 +1,12 @@
 package com.github.java5wro.ticket;
 
+import com.github.java5wro.ticket.DTO.TicketDTO;
 import com.github.java5wro.ticket.entity.TicketEntity;
+import com.github.java5wro.ticket.repository.TicketRepository;
 import org.springframework.stereotype.Service;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 
 @Service
@@ -25,11 +30,11 @@ public class TicketService {
     }
 
     private TicketEntity toEntity(TicketDTO ticketDTO){
-        return new TicketEntity(ticketDTO.getId(), ticketDTO.getName);
+        return new TicketEntity(ticketDTO.getId(), ticketDTO.getUuid(), ticketDTO.getEvent(), ticketDTO.getOwner(), ticketDTO.getPurchaseDate());
     }
 
     private TicketDTO toTicketDTO(TicketEntity entity){
-        return TicketDTO(entity.getId(), entity.getName);
+        return TicketDTO(entity.getId(), entity.getUuid(), entity.getEvent(), entity.getOwner(), entity.getPurchaseDate());
     }
 
 
