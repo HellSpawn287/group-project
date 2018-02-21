@@ -1,5 +1,8 @@
 package com.github.java5wro.ticket.DTO;
 
+import com.github.java5wro.event.Event;
+import com.github.java5wro.user.model.User;
+
 import java.time.LocalDate;
 
 /**
