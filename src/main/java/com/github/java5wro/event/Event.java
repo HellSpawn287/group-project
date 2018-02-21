@@ -23,11 +23,21 @@ public class Event {
     public Event() {
     }
 
-    public Event(String name, LocalDate time, String description, Integer price) {
+    public Event(String uuid, String name, LocalDate time, String description, Integer price, User author) {
+        this.uuid = uuid;
         this.name = name;
         this.time = time;
         this.description = description;
         this.price = price;
+        this.author = author;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 
     public Long getId() {
