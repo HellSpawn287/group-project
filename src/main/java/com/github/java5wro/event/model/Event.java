@@ -1,26 +1,49 @@
-package com.github.java5wro.event;
+package com.github.java5wro.event.model;
 
-import org.h2.engine.User;
+import com.github.java5wro.user.model.User;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class EventDto {
+@Entity
+public class Event {
+    @Id
+    @GeneratedValue
     private Long id;
+    @NotNull
     private String uuid = UUID.randomUUID().toString();
+    @NotNull
     private String name;
+    @NotNull
     private LocalDate time;
+    @NotNull
     private String description;
+    @NotNull
     private Integer price;
+    @NotNull
     private User author;
 
-    public EventDto(Long id, String uuid, String name, LocalDate time, String description, Integer price, User author) {
-        this.id = id;
+    protected Event() {
+    }
+
+    public Event(String uuid, String name, LocalDate time, String description, Integer price, User author) {
         this.uuid = uuid;
         this.name = name;
         this.time = time;
         this.description = description;
         this.price = price;
+        this.author = author;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
         this.author = author;
     }
 
@@ -70,13 +93,5 @@ public class EventDto {
 
     public void setPrice(Integer price) {
         this.price = price;
-    }
-
-    public User getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(User author) {
-        this.author = author;
     }
 }
