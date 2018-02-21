@@ -1,10 +1,11 @@
 package com.github.java5wro.event;
 
-import org.h2.engine.User;
+import com.github.java5wro.user.model.User;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -13,14 +14,20 @@ public class Event {
     @Id
     @GeneratedValue
     private Long id;
+    @NotNull
     private String uuid = UUID.randomUUID().toString();
+    @NotNull
     private String name;
+    @NotNull
     private LocalDate time;
+    @NotNull
     private String description;
+    @NotNull
     private Integer price;
+    @NotNull
     private User author;
 
-    public Event() {
+    protected Event() {
     }
 
     public Event(String uuid, String name, LocalDate time, String description, Integer price, User author) {
