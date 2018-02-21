@@ -1,11 +1,9 @@
-package com.github.java5wro.event;
+package com.github.java5wro.event.model;
 
-import com.github.java5wro.event.Event;
-import com.github.java5wro.event.EventDto;
-import com.github.java5wro.event.EventRepository;
+import com.github.java5wro.event.RepPlusController.EventDto;
+import com.github.java5wro.event.RepPlusController.EventRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -19,8 +17,8 @@ public class EventService {
         this.repository = repository;
     }
 
-    public void findAll (){
-//        return new repository.findAll().stream().map(this::toDto).collect(Collectors.toList());
+    public void findAllEvents (){
+        return new repository.findAll().stream().map(this::toDto).collect(Collectors.toList());
     }
 
     private EventDto toDto(EventDto event) {
