@@ -1,7 +1,7 @@
-package com.github.java5wro.event;
+package com.github.java5wro.event.RepPlusController;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import com.github.java5wro.event.model.Event;
+import com.github.java5wro.event.model.EventService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
