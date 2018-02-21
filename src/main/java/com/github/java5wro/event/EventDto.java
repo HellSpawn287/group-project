@@ -1,6 +1,6 @@
 package com.github.java5wro.event;
 
-import org.h2.engine.User;
+import com.github.java5wro.user.model.User;
 
 import java.time.LocalDate;
 import java.util.UUID;
