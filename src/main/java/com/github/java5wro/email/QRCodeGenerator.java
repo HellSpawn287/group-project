@@ -1,34 +1,21 @@
 package com.github.java5wro.email;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 
 import net.glxn.qrgen.QRCode;
 import net.glxn.qrgen.image.ImageType;
+import sun.misc.IOUtils;
+
 public class QRCodeGenerator {
 
-public void QrGenerator (String uuid){
+public ByteArrayInputStream QrGenerator (String uuid){
 
     ByteArrayOutputStream stream = QRCode.from(uuid).stream();
 
-		try
-
-        {
-            FileOutputStream fout = new FileOutputStream(new File("C:\\Users\\Jaro\\Desktop\\zadania2\\Qrcodes\\QR_Code.JPG"));
+    ByteArrayInputStream qrCode = new ByteArrayInputStream(stream.toByteArray());
 
 
-            fout.write(stream.toByteArray());
-
-            fout.flush();
-            fout.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+return qrCode;
 
 }
 }
