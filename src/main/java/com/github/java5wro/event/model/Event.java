@@ -1,4 +1,4 @@
-package com.github.java5wro.event;
+package com.github.java5wro.event.model;
 
 import com.github.java5wro.user.model.User;
 
