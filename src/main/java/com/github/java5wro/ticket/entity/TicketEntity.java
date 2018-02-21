@@ -1,5 +1,8 @@
 package com.github.java5wro.ticket.entity;
 
+import com.github.java5wro.event.Event;
+import com.github.java5wro.user.model.User;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDate;
