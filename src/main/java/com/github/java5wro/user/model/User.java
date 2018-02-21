@@ -1,19 +1,30 @@
 package com.github.java5wro.user.model;
 
-import java.util.UUID;
+import org.hibernate.validator.constraints.NotBlank;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotBlank
     private String uuid;
+    @NotBlank
     private String name;
+    @NotBlank
     private String email;
+    @NotBlank
     private String password;
+    @NotBlank
     private String role;
 
-    public User(){
-
-    }
+    protected User(){}
 
     public User(Long id, String uuid, String name, String email, String password, String role) {
         this.id = id;

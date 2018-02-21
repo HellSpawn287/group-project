@@ -13,7 +13,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import static springfox.documentation.builders.PathSelectors.regex;
 
 @SpringBootApplication
-@EnableSwagger2
+@EnableSwagger
+@SpringBootApplication
 public class Application {
 
     public static void main(String[] args) {
@@ -39,7 +40,5 @@ public class Application {
                 .version("2.0")
                 .build();
     }
-
-
 
 }
