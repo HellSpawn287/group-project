@@ -1,20 +1,17 @@
-package com.github.java5wro.event.RepPlusController;
-
-import com.github.java5wro.user.model.User;
+package com.github.java5wro.event;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 public class EventDto {
     private Long id;
-    private String uuid = UUID.randomUUID().toString();
+    private String uuid;
     private String name;
     private LocalDate time;
     private String description;
     private Integer price;
-    private User author;
+    private Long author;
 
-    public EventDto(Long id, String uuid, String name, LocalDate time, String description, Integer price, User author) {
+    public EventDto(Long id, String uuid, String name, LocalDate time, String description, Integer price, Long author) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -72,11 +69,11 @@ public class EventDto {
         this.price = price;
     }
 
-    public User getAuthor() {
+    public Long getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(Long author) {
         this.author = author;
     }
 }

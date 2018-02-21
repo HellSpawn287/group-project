@@ -1,9 +1,8 @@
-package com.github.java5wro.event.model;
-
-import com.github.java5wro.user.model.User;
+package com.github.java5wro.event;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -12,7 +11,7 @@ import java.util.UUID;
 @Entity
 public class Event {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @NotNull
     private String uuid = UUID.randomUUID().toString();
@@ -25,12 +24,12 @@ public class Event {
     @NotNull
     private Integer price;
     @NotNull
-    private User author;
+    private Long author;
 
     protected Event() {
     }
 
-    public Event(String uuid, String name, LocalDate time, String description, Integer price, User author) {
+    public Event(String uuid, String name, LocalDate time, String description, Integer price, Long author) {
         this.uuid = uuid;
         this.name = name;
         this.time = time;
@@ -39,11 +38,11 @@ public class Event {
         this.author = author;
     }
 
-    public User getAuthor() {
+    public Long getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(Long author) {
         this.author = author;
     }
 
