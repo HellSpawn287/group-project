@@ -30,7 +30,7 @@ public class TicketService {
     }
 
     private TicketEntity toEntity(TicketDTO ticketDTO){
-        return new TicketEntity(ticketDTO.getId(), ticketDTO.getUuid(), ticketDTO.getEvent(), ticketDTO.getPurchaseDate(),ticketDTO.getOwner());
+        return new TicketEntity(ticketDTO.getUuid(), ticketDTO.getEvent(), ticketDTO.getPurchaseDate(),ticketDTO.getOwner());
     }
 
     private TicketDTO toTicketDTO(TicketEntity entity){
