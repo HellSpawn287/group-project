@@ -5,6 +5,9 @@ import com.github.java5wro.ticket.entity.TicketEntity;
 import com.github.java5wro.ticket.repository.TicketRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -35,6 +38,9 @@ public class TicketService {
 
     private TicketDTO toTicketDTO(TicketEntity entity){
         return new TicketDTO(entity.getId(), entity.getUuid(), entity.getEvent(),entity.getPurchaseDate(), entity.getOwner());
+    }
+    public List<TicketEntity> findAll(){
+        return ticketRepository.findAll();
     }
 
 
