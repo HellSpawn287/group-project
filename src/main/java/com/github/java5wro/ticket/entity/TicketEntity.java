@@ -18,7 +18,8 @@ public class TicketEntity {
 
     private User owner;
 
-    public TicketEntity(String uuid, Event event, LocalDate purchaseDate, User owner) {
+    public TicketEntity(Integer ID, String uuid, Event event, LocalDate purchaseDate, User owner) {
+        this.id = ID;
         this.uuid = uuid;
         this.event = event;
         this.purchaseDate = purchaseDate;
