@@ -8,14 +8,14 @@ import sun.misc.IOUtils;
 
 public class QRCodeGenerator {
 
-public ByteArrayInputStream QrGenerator (String uuid){
+public byte[] QrGenerator (String uuid){
 
-    ByteArrayOutputStream stream = QRCode.from(uuid).stream();
-
-    ByteArrayInputStream qrCode = new ByteArrayInputStream(stream.toByteArray());
+    ByteArrayOutputStream stream = QRCode.from(uuid).withSize(250, 250).stream();
 
 
-return qrCode;
+
+
+return stream.toByteArray();
 
 }
 }
