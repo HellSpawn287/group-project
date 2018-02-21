@@ -1,8 +1,5 @@
 package com.github.java5wro.event;
 
-import com.github.java5wro.event.Event;
-import com.github.java5wro.event.EventDto;
-import com.github.java5wro.event.EventRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,12 +16,26 @@ public class EventService {
         this.repository = repository;
     }
 
-    public void findAll (){
-//        return new repository.findAll().stream().map(this::toDto).collect(Collectors.toList());
+    public List<EventDto> findAll (){
+        return toDto(repository.findAll());
     }
 
-    private EventDto toDto(EventDto event) {
-        return new EventDto(event.getId(), event.getUuid(), event.getName(), event.getTime(), event.getDescription(), event.getPrice(), event.getAuthor());
+    private EventDto toDto(Event event) {
+        return new EventDto(event.getId(), event.getUuid(), event.getName(), event.getTime(),
+                event.getDescription(), event.getPrice(), event.getAuthor());
+    }
+
+    private Event toEntity (EventDto eventDto) {
+        return new Event(eventDto.getUuid(), eventDto.getName(), eventDto.getTime(), eventDto.getDescription(),
+            eventDto.getPrice(), eventDto.getAuthor());
+    }
+
+    private List<Event> toEntity (List<EventDto> eventDtoList) {
+        return eventDtoList.stream().map(this::toEntity).collect(Collectors.toList());
+    }
+
+    private List<EventDto> toDto (List<Event> entities) {
+        return entities.stream().map(this::toDto).collect(Collectors.toList());
     }
 
     public void addEvent (Event event) {
@@ -32,7 +43,4 @@ public class EventService {
         checkArgument(event.getId() == null, "If event is to be added, id has to be null");
         repository.save(event);
     }
-
-
-
 }
