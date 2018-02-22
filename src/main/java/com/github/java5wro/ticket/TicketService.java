@@ -19,13 +19,13 @@ public class TicketService {
 
     public void addNewTicket(TicketDTO ticketDTO) {
         checkNotNull(ticketDTO, "Ticket to add cannot be null");
-        checkArgument(ticketDTO.getId() == null, "If ticket is to be added, it needs it's id to be null but is %s.", ticketDTO.getId());
+        checkArgument(ticketDTO.getUuid() == null, "If ticket is to be added, it needs it's id to be null but is %s.", ticketDTO.getUuid());
         ticketRepository.save(toEntity(ticketDTO));
     }
 
     public void edit(TicketDTO ticketDTO) {
         checkNotNull(ticketDTO, "Ticket to add cannot be null");
-        checkArgument(ticketDTO.getId() != null, "If ticket is to be edited, it needs it's id to be set.");
+        checkArgument(ticketDTO.getUuid() != null, "If ticket is to be edited, it needs it's id to be set.");
         ticketRepository.save(toEntity(ticketDTO));
     }
 
@@ -34,6 +34,6 @@ public class TicketService {
     }
 
     private TicketDTO toTicketDTO(TicketEntity entity){
-        return TicketDTO();
+        return new TicketDTO(entity.getUuid(), entity.getEvent(), entity.getPurchaseDate(), entity.getOwner());
     }
 }
