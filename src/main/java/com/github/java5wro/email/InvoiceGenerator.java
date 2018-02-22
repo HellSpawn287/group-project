@@ -1,7 +1,9 @@
 package com.github.java5wro.email;
 
+import javassist.bytecode.ByteArray;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -13,7 +15,7 @@ public class InvoiceGenerator {
 
     private static final String FILE_NAME = "invoice.xlsx";
 
-    public static void main(String[] args) {
+    public static FileOutputStream invoiceGenerator()  {
 
 
         XSSFWorkbook workbook = new XSSFWorkbook();
@@ -46,13 +48,12 @@ public class InvoiceGenerator {
         try {
             FileOutputStream outputStream = new FileOutputStream(FILE_NAME);
             workbook.write(outputStream);
-            workbook.close();
+            return outputStream;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        System.out.println("Done");
+        return null;
     }
 }
