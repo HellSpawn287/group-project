@@ -40,16 +40,16 @@ public class EventService {
         repository.save(event);
     }
 
-    public List<EventDto> findAll (){
+    public List<EventDto> findAllEvents (){
         return toDto(repository.findAll());
     }
 
-    public void delete (EventDto event) {
+    public void deleteEvent (EventDto event) {
         checkNotNull(event,"Event does not exist");
         repository.delete(toEntity(event));
     }
 
-    public void edit (EventDto event) {
+    public void editEvent (EventDto event) {
         checkNotNull(event, "Event cannot be null");
         repository.save(toEntity(event));
     }
