@@ -1,6 +1,7 @@
 package com.github.java5wro.email;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.InputStreamSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -9,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.mail.util.ByteArrayDataSource;
 import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -34,11 +37,12 @@ public class EmailService implements EmailSender {
             helper.setSubject(subject);
             helper.setText(content, false);
 
-//            PdfGenerator pdf = new PdfGenerator();
-//             pdf.createPdf();
-//            InputStream att = new ByteArrayInputStream(pdf.createPdf());
-//
-//            helper.addAttachment("ticket.pdf", (InputStreamSource) att, "*.pdf");
+            PdfGenerator pdf = new PdfGenerator();
+            ByteArrayDataSource attachment = new ByteArrayDataSource(pdf.createPdf(),"aplication/pdf");
+            helper.addAttachment("Ticket.pdf",attachment);
+
+
+
 
         } catch (MessagingException e) {
             e.printStackTrace();
