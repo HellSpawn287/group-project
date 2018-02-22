@@ -1,5 +1,6 @@
 package com.github.java5wro;
 
+import com.github.java5wro.user.model.Role;
 import com.github.java5wro.user.model.User;
 import com.github.java5wro.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,6 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.util.UUID;
-
 import static springfox.documentation.builders.PathSelectors.regex;
 
 
@@ -22,8 +21,12 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @SpringBootApplication
 public class Application implements CommandLineRunner {
 
-    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    public Application(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -52,7 +55,6 @@ public class Application implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
 
-        String uuid = UUID.randomUUID().toString();
-        userRepository.save(new User(uuid,"randomUser","randomUser@gmail.com","password","user"));
+        userRepository.save(new User("randomUser","randomUser@gmail.com","password", Role.USER));
     }
 }

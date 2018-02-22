@@ -3,6 +3,7 @@ package com.github.java5wro.user.model;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users")
@@ -12,7 +13,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @NotBlank
-    private String uuid;
+    private String uuid = UUID.randomUUID().toString();
     @NotBlank
     private String name;
     @NotBlank
@@ -20,12 +21,11 @@ public class User {
     @NotBlank
     private String password;
     @NotBlank
-    private String role;
+    private Role role;
 
     protected User(){}
 
-    public User(String uuid, String name, String email, String password, String role) {
-        this.uuid = uuid;
+    public User(String name, String email, String password, Role role) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -72,11 +72,11 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
