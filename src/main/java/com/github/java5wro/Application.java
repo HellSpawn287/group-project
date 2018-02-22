@@ -22,8 +22,12 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @SpringBootApplication
 public class Application implements CommandLineRunner {
 
-    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    public Application(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -50,9 +54,8 @@ public class Application implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... strings) throws Exception {
+    public void run(String... strings) {
 
-        String uuid = UUID.randomUUID().toString();
-        userRepository.save(new User(uuid,"randomUser","randomUser@gmail.com","password","user"));
+        userRepository.save(new User("randomUser","randomUser@gmail.com","password","user"));
     }
 }
