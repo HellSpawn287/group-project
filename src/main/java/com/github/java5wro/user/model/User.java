@@ -6,12 +6,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.UUID;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -30,29 +27,21 @@ public class User implements UserDetails{
     @NotBlank
     private String password;
     @NotBlank
-    private String role;
+    private Role role;
 
     protected User(){}
 
-
-
-    public User(String email, String password, String role) {
-        this.email = email;
-        this.password = password;
-        this.role = role;
-    }
-
-    public User(Long id, String uuid, String name, String email, String password, String role) {
-        this.id = id;
-        this.uuid = uuid;
+    public User(String name, String email, String password, Role role) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.role = role;
     }
 
-    public User(String randomUser, String string, String password, String role_user) {
-
+    public User(String email, String password, Role role) {
+        this.email = email;
+        this.password = password;
+        this.role = role;
     }
 
     public Long getId() {
@@ -125,11 +114,11 @@ public class User implements UserDetails{
         this.password = password;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 

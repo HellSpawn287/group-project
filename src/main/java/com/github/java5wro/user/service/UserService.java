@@ -1,11 +1,9 @@
 package com.github.java5wro.user.service;
 
+import com.github.java5wro.user.model.Role;
 import com.github.java5wro.user.model.User;
 import com.github.java5wro.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +46,7 @@ public class UserService {
 
     private void createSampleUser() {
         if (!findByEmail("user@user.pl").isPresent()) {
-            User entity = new User("user@user.pl" ,encoder.encode("user1"),"ROLE_USER");
+            User entity = new User("user@user.pl" ,encoder.encode("user1"), Role.USER);
             userRepository.save(entity);
         }
     }
