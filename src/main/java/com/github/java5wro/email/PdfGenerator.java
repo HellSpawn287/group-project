@@ -8,8 +8,9 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
+import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
 
-import java.io.ByteArrayOutputStream;
+
 import java.io.IOException;
 
 public class PdfGenerator {
@@ -72,6 +73,7 @@ public class PdfGenerator {
         contentStream.close();
 
 // Save the results and ensure that the document is properly closed:
+
         document.save("Ticket.pdf");
         ByteArrayOutputStream attachement = new ByteArrayOutputStream();
         document.save(attachement);

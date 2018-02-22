@@ -7,22 +7,24 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import javax.mail.util.ByteArrayDataSource;
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class InvoiceGenerator {
 
-    private static final String FILE_NAME = "invoice.xlsx";
+    private  final String FILE_NAME = "invoice.xlsx";
 
-    public static FileOutputStream invoiceGenerator()  {
+    public  byte[] invoiceGenerator()  {
 
 
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet("Invoice data");
         Object[][] invoiceData = {
-                {"Invoice number", "Firstname", "Lastname", "Price", "Data"},
-                {"***Invoice number***", "***Firstname***", "***Lastname***", "***Price***", "***Data***"}
+                { "Firstname", "Lastname", "Price", "Data"},
+                { "***Firstname***", "***Lastname***", "***Price***", "***Data***"}
         };
 
         int rowNum = 0;
@@ -41,14 +43,14 @@ public class InvoiceGenerator {
             }
         }
 
-        for(int i = 0; i < invoiceData.length; i++) {
+        for(int i = 0; i < 10; i++) {
             sheet.autoSizeColumn(i);
         }
 
         try {
-            FileOutputStream outputStream = new FileOutputStream(FILE_NAME);
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             workbook.write(outputStream);
-            return outputStream;
+            return outputStream.toByteArray();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
