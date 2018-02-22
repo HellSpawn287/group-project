@@ -23,7 +23,7 @@ public class UserService {
     public UserService(UserRepository userRepository, PasswordEncoder encoder) {
         this.userRepository = userRepository;
         this.encoder = encoder;
-        createSampleUser();
+//        createSampleUser();
     }
 
     public List<User> getAllUsers() {
@@ -48,7 +48,7 @@ public class UserService {
 
     private void createSampleUser() {
         if (!findByEmail("user@user.pl").isPresent()) {
-            User entity = new User("user@user.pl" ,encoder.encode("user1"),"ROLE_USER");
+            User entity = new User("user@user.pl" ,encoder.encode("user1"),"USER");
             userRepository.save(entity);
         }
     }

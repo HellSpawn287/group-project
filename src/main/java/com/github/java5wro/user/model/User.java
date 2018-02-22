@@ -42,18 +42,14 @@ public class User implements UserDetails{
         this.role = role;
     }
 
-    public User(Long id, String uuid, String name, String email, String password, String role) {
-        this.id = id;
-        this.uuid = uuid;
+    public User(String name, String email, String password, String role) {
+
         this.name = name;
         this.email = email;
         this.password = password;
         this.role = role;
     }
 
-    public User(String randomUser, String string, String password, String role_user) {
-
-    }
 
     public Long getId() {
         return id;

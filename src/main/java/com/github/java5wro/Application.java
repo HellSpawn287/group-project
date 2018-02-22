@@ -56,7 +56,7 @@ public class Application implements CommandLineRunner {
     @Override
     public void run(String... strings) {
 
-        userRepository.save(new User("randomUser","randomUser@gmail.com","password","ROLE_USER"));
+//        userRepository.save(new User("randomUser","randomUser@gmail.com","password","ROLE_USER"));
     }
 
 
