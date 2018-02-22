@@ -1,6 +1,5 @@
 package com.github.java5wro;
 
-import com.github.java5wro.user.model.Role;
 import com.github.java5wro.user.model.User;
 import com.github.java5wro.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,8 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import java.util.UUID;
 
 import static springfox.documentation.builders.PathSelectors.regex;
 
@@ -53,8 +54,8 @@ public class Application implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... strings) throws Exception {
+    public void run(String... strings) {
 
-        userRepository.save(new User("randomUser","randomUser@gmail.com","password", Role.USER));
+        userRepository.save(new User("randomUser","randomUser@gmail.com","password","user"));
     }
 }

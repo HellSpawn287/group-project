@@ -21,11 +21,11 @@ public class User {
     @NotBlank
     private String password;
     @NotBlank
-    private Role role;
+    private String role;
 
     protected User(){}
 
-    public User(String name, String email, String password, Role role) {
+    public User(String name, String email, String password, String role) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -72,11 +72,11 @@ public class User {
         this.password = password;
     }
 
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
