@@ -9,6 +9,7 @@ import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class PdfGenerator {
@@ -17,7 +18,7 @@ public class PdfGenerator {
         stefan.createPdf();
     }
 
-    public void createPdf() throws IOException {
+    public byte[] createPdf() throws IOException {
 
 
         // Create a document and add a page to it
@@ -72,7 +73,11 @@ public class PdfGenerator {
 
 // Save the results and ensure that the document is properly closed:
         document.save("Ticket.pdf");
-        document.close();
+        ByteArrayOutputStream attachement = new ByteArrayOutputStream();
+        document.save(attachement);
+        return attachement.toByteArray();
+
+
 
     }
 }
