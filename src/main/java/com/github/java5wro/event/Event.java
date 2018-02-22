@@ -93,4 +93,45 @@ public class Event {
     public void setPrice(Integer price) {
         this.price = price;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Event event = (Event) o;
+
+        if (id != null ? !id.equals(event.id) : event.id != null) return false;
+        if (uuid != null ? !uuid.equals(event.uuid) : event.uuid != null) return false;
+        if (name != null ? !name.equals(event.name) : event.name != null) return false;
+        if (time != null ? !time.equals(event.time) : event.time != null) return false;
+        if (description != null ? !description.equals(event.description) : event.description != null) return false;
+        if (price != null ? !price.equals(event.price) : event.price != null) return false;
+        return author != null ? author.equals(event.author) : event.author == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (uuid != null ? uuid.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (time != null ? time.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + (author != null ? author.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + id +
+                ", uuid='" + uuid + '\'' +
+                ", name='" + name + '\'' +
+                ", time=" + time +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", author=" + author +
+                '}';
+    }
 }
