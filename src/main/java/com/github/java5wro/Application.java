@@ -1,10 +1,5 @@
 package com.github.java5wro;
 
-import com.github.java5wro.user.model.Role;
-import com.github.java5wro.user.model.User;
-import com.github.java5wro.user.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -19,14 +14,7 @@ import static springfox.documentation.builders.PathSelectors.regex;
 
 @EnableSwagger2
 @SpringBootApplication
-public class Application implements CommandLineRunner {
-
-    private UserRepository userRepository;
-
-    @Autowired
-    public Application(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+public class Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -51,12 +39,5 @@ public class Application implements CommandLineRunner {
                 .version("2.0")
                 .build();
     }
-
-    @Override
-    public void run(String... strings) {
-
-        userRepository.save(new User("randomUser","randomUser@gmail.com","password", Role.USER));
-    }
-
 
 }
