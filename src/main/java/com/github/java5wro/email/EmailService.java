@@ -40,7 +40,9 @@ public class EmailService implements EmailSender {
             PdfGenerator pdf = new PdfGenerator();
             ByteArrayDataSource attachment = new ByteArrayDataSource(pdf.createPdf(),"aplication/pdf");
             helper.addAttachment("Ticket.pdf",attachment);
-
+            InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
+            ByteArrayDataSource attachment1 = new ByteArrayDataSource(invoiceGenerator.invoiceGenerator(),"aplication/xls");
+            helper.addAttachment("Invoice.xls",attachment1);
 
 
 
