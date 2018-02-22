@@ -1,4 +1,4 @@
-package com.github.java5wro.ticket.entity;
+package com.github.java5wro.ticket;
 
 
 import javax.persistence.Entity;
@@ -9,9 +9,6 @@ import java.time.LocalDate;
 @Entity
 public class TicketEntity {
 
-    @Id
-    @GeneratedValue
-    private Integer id;
     @NotNull
     private String uuid;
     @NotNull
@@ -31,13 +28,7 @@ public class TicketEntity {
         this.owner = owner;
     }
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getUuid() {
         return uuid;
