@@ -6,6 +6,7 @@ import com.github.java5wro.user.model.User;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 public class TicketEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @NotNull
     private String uuid;
