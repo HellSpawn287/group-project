@@ -9,6 +9,8 @@ import java.time.LocalDate;
 @Entity
 public class TicketEntity {
 
+    @Id
+    private Integer id;
     @NotNull
     private String uuid;
     @NotNull
