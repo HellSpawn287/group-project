@@ -1,6 +1,5 @@
 package com.github.java5wro.event;
 
-
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,8 +16,7 @@ public class EventService {
         this.repository = repository;
     }
 
-    public List<EventDto> findAll() {
-
+    public List<EventDto> findAll (){
         return toDto(repository.findAll());
     }
 
@@ -27,20 +25,20 @@ public class EventService {
                 event.getDescription(), event.getPrice(), event.getAuthor());
     }
 
-    private Event toEntity(EventDto eventDto) {
+    private Event toEntity (EventDto eventDto) {
         return new Event(eventDto.getUuid(), eventDto.getName(), eventDto.getTime(), eventDto.getDescription(),
-                eventDto.getPrice(), eventDto.getAuthor());
+            eventDto.getPrice(), eventDto.getAuthor());
     }
 
-    private List<Event> toEntity(List<EventDto> eventDtoList) {
+    private List<Event> toEntity (List<EventDto> eventDtoList) {
         return eventDtoList.stream().map(this::toEntity).collect(Collectors.toList());
     }
 
-    private List<EventDto> toDto(List<Event> entities) {
+    private List<EventDto> toDto (List<Event> entities) {
         return entities.stream().map(this::toDto).collect(Collectors.toList());
     }
 
-    public void addEvent(Event event) {
+    public void addEvent (Event event) {
         checkNotNull(event, "Event cannot be null");
         checkArgument(event.getId() == null, "If event is to be added, id has to be null");
         repository.save(event);
