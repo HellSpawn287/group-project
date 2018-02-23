@@ -1,5 +1,7 @@
 package com.github.java5wro.ticket;
 
+import com.github.java5wro.event.Event;
+
 import java.time.LocalDate;
 
 /**
@@ -8,14 +10,14 @@ import java.time.LocalDate;
 public class TicketDTO {
 
     private String uuid;
-    private Long event;
+    private Event event;
     private LocalDate purchaseDate;
     private Long owner;
 
     public TicketDTO() {
     }
 
-    public TicketDTO(String uuid, Long event, LocalDate purchaseDate, Long owner) {
+    public TicketDTO(String uuid, Event event, LocalDate purchaseDate, Long owner) {
         this.uuid = uuid;
         this.event = event;
         this.purchaseDate = purchaseDate;
@@ -31,11 +33,11 @@ public class TicketDTO {
         this.uuid = uuid;
     }
 
-    public Long getEvent() {
+    public Event getEvent() {
         return event;
     }
 
-    public void setEvent(Long event) {
+    public void setEvent(Event event) {
         this.event = event;
     }
 

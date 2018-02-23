@@ -1,10 +1,9 @@
 package com.github.java5wro.ticket;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.github.java5wro.event.Event;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 @Entity
@@ -17,7 +16,8 @@ public class TicketEntity {
     @NotNull
     private String uuid;
     @NotNull
-    private Long event;
+    @ManyToOne
+    private Event event;
     @NotNull
     private LocalDate purchaseDate;
     @NotNull
@@ -26,7 +26,7 @@ public class TicketEntity {
     protected TicketEntity() {
     }
 
-    public TicketEntity(String uuid, Long event, LocalDate purchaseDate, Long owner) {
+    public TicketEntity(String uuid, Event event, LocalDate purchaseDate, Long owner) {
         this.uuid = uuid;
         this.event = event;
         this.purchaseDate = purchaseDate;
@@ -45,11 +45,11 @@ public class TicketEntity {
         this.uuid = uuid;
     }
 
-    public Long getEvent() {
+    public Event getEvent() {
         return event;
     }
 
-    public void setEvent(Long event) {
+    public void setEvent(Event event) {
         this.event = event;
     }
 
