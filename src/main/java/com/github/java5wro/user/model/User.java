@@ -1,35 +1,15 @@
 package com.github.java5wro.user.model;
 
-import org.hibernate.validator.constraints.NotBlank;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "users")
 public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @NotBlank
-    private String uuid;
-    @NotBlank
     private String name;
-    @NotBlank
     private String email;
-    @NotBlank
-    private String password;
-    @NotBlank
-    private String role;
 
-    protected User(){}
-
-    public User(String uuid, String name, String email, String password, String role) {
-        this.uuid = uuid;
+    public User(Integer id, String name, String email) {
+        this.id = id;
         this.name = name;
         this.email = email;
-        this.password = password;
-        this.role = role;
     }
 
     public Integer getId() {
@@ -38,14 +18,6 @@ public class User {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
     }
 
     public String getName() {
@@ -64,31 +36,32 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (getId() != null ? !getId().equals(user.getId()) : user.getId() != null) return false;
+        if (getName() != null ? !getName().equals(user.getName()) : user.getName() != null) return false;
+        return getEmail() != null ? getEmail().equals(user.getEmail()) : user.getEmail() == null;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
+    @Override
+    public int hashCode() {
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
+        return result;
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", uuid='" + uuid + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
                 '}';
     }
 }

@@ -2,17 +2,15 @@ package com.github.java5wro;
 
 import com.github.java5wro.email.EmailService;
 import org.springframework.boot.CommandLineRunner;
-import com.github.java5wro.user.model.User;
+import com.github.java5wro.user.model.UserEntity;
 import com.github.java5wro.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.io.IOException;
-import org.springframework.context.annotation.Bean;
+
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
@@ -69,6 +67,6 @@ public class Application implements CommandLineRunner {
     public void run(String... strings) throws Exception {
 
         String uuid = UUID.randomUUID().toString();
-        userRepository.save(new User(uuid,"randomUser","randomUser@gmail.com","password","user"));
+        userRepository.save(new UserEntity(uuid,"randomUser","randomUser@gmail.com","password","user"));
     }
 }

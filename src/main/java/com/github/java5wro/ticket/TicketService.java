@@ -1,7 +1,7 @@
 package com.github.java5wro.ticket;
 
-import com.github.java5wro.event.Event;
-import com.github.java5wro.user.model.User;
+import com.github.java5wro.event.EventEntity;
+import com.github.java5wro.user.model.UserEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -32,11 +32,11 @@ public class TicketService {
     }
 
     private TicketEntity toEntity(TicketDTO ticketDTO) {
-        return new TicketEntity(ticketDTO.getId(), ticketDTO.getUuid(), ticketDTO.getEvent(), ticketDTO.getPurchaseDate(), ticketDTO.getOwner());
+        return new TicketEntity(ticketDTO.getId(), ticketDTO.getUuid(), ticketDTO.getEvent(), ticketDTO.getPurchaseDate());
     }
 
     private TicketDTO toTicketDTO(TicketEntity entity) {
-        return new TicketDTO(entity.getId(), entity.getUuid(), entity.getEvent(), entity.getPurchaseDate(), entity.getOwner());
+        return new TicketDTO(entity.getId(), entity.getUuid(), entity.getEvent(), entity.getPurchaseDate(), entity.getOwner() == null ? " " : entity.getOwner().getName());
     }
 
     public Set<TicketEntity> findAll() {
@@ -46,7 +46,7 @@ public class TicketService {
     public TicketEntity findByUUID(String uuid){
         return ticketRepository.findAll().stream().filter(t->t.equals(uuid)).findFirst().get();
     }
-    public Set<TicketEntity> findByUser(User user){
+    public Set<TicketEntity> findByUser(UserEntity user){
         HashSet<TicketEntity> set = new HashSet<>();
         for (TicketEntity temp:ticketRepository.findAll()) {
             if(temp.getOwner().equals(user))
@@ -54,7 +54,7 @@ public class TicketService {
         }
         return set;
     }
-    public Set<TicketEntity> findByEvent(Event event){
+    public Set<TicketEntity> findByEvent(EventEntity event){
         HashSet<TicketEntity> set = new HashSet<>();
         for (TicketEntity temp:ticketRepository.findAll()) {
             if(temp.getEvent().equals(event))

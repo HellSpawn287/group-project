@@ -2,17 +2,16 @@ package com.github.java5wro.ticket;
 
 
 import com.github.java5wro.event.EventEntity;
-import com.github.java5wro.user.model.User;
+import com.github.java5wro.user.model.UserEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 @Entity
 public class TicketEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @NotNull
     private String uuid;
@@ -20,20 +19,28 @@ public class TicketEntity {
     private EventEntity event;
     @NotNull
     private LocalDate purchaseDate;
-    @NotNull
-    private Integer owner;
+    @OneToOne
+    private UserEntity owner;
 
     protected TicketEntity() {
     }
 
 
-    public TicketEntity(Integer id, String uuid, EventEntity event, LocalDate purchaseDate, Integer owner) {
+    public TicketEntity(Integer id, String uuid, EventEntity event, LocalDate purchaseDate, UserEntity owner) {
         this.id = id;
         this.uuid = uuid;
         this.event = event;
         this.purchaseDate = purchaseDate;
         this.owner = owner;
     }
+
+    public TicketEntity(Integer id, String uuid, EventEntity event, LocalDate purchaseDate) {
+        this.id = id;
+        this.uuid = uuid;
+        this.event = event;
+        this.purchaseDate = purchaseDate;
+    }
+
 
     public Integer getId() {
         return id;
@@ -67,11 +74,11 @@ public class TicketEntity {
         this.purchaseDate = purchaseDate;
     }
 
-    public Integer getOwner() {
+    public UserEntity getOwner() {
         return owner;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner.getId();
+    public void setOwner(UserEntity owner) {
+        this.owner = owner;
     }
 }
