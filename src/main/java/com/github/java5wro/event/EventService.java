@@ -20,25 +20,25 @@ public class EventService {
         return toDto(repository.findAll());
     }
 
-    private EventDto toDto(Event event) {
+    private EventDto toDto(EventEntity event) {
         return new EventDto(event.getId(), event.getUuid(), event.getName(), event.getTime(),
                 event.getDescription(), event.getPrice(), event.getAuthor());
     }
 
-    private Event toEntity (EventDto eventDto) {
-        return new Event(eventDto.getUuid(), eventDto.getName(), eventDto.getTime(), eventDto.getDescription(),
+    private EventEntity toEntity (EventDto eventDto) {
+        return new EventEntity(eventDto.getUuid(), eventDto.getName(), eventDto.getTime(), eventDto.getDescription(),
             eventDto.getPrice(), eventDto.getAuthor());
     }
 
-    private List<Event> toEntity (List<EventDto> eventDtoList) {
+    private List<EventEntity> toEntity (List<EventDto> eventDtoList) {
         return eventDtoList.stream().map(this::toEntity).collect(Collectors.toList());
     }
 
-    private List<EventDto> toDto (List<Event> entities) {
+    private List<EventDto> toDto (List<EventEntity> entities) {
         return entities.stream().map(this::toDto).collect(Collectors.toList());
     }
 
-    public void addEvent (Event event) {
+    public void addEvent (EventEntity event) {
         checkNotNull(event, "Event cannot be null");
         checkArgument(event.getId() == null, "If event is to be added, id has to be null");
         repository.save(event);
