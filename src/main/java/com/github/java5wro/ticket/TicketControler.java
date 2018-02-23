@@ -20,7 +20,7 @@ public class TicketControler {
 
     @GetMapping(value = "/find")
     public Set<TicketEntity> getTickets(){
-        return new HashSet<>(service.findAll());
+        return service.findAll();
     }
 
         

@@ -1,9 +1,9 @@
 package com.github.java5wro.ticket;
 
-import com.github.java5wro.ticket.DTO.TicketDTO;
-import com.github.java5wro.ticket.entity.TicketEntity;
-import com.github.java5wro.ticket.repository.TicketRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -29,11 +29,21 @@ public class TicketService {
         ticketRepository.save(toEntity(ticketDTO));
     }
 
-    private TicketEntity toEntity(TicketDTO ticketDTO){
+    private TicketEntity toEntity(TicketDTO ticketDTO) {
         return new TicketEntity(ticketDTO.getUuid(), ticketDTO.getEvent(), ticketDTO.getPurchaseDate(), ticketDTO.getOwner());
     }
 
-    private TicketDTO toTicketDTO(TicketEntity entity){
+    private TicketDTO toTicketDTO(TicketEntity entity) {
         return new TicketDTO(entity.getUuid(), entity.getEvent(), entity.getPurchaseDate(), entity.getOwner());
     }
+
+    public Set<TicketEntity> findAll() {
+       return new HashSet<>(ticketRepository.findAll());
+    }
+
+    public TicketEntity findByUUID(String uuid){
+        return ticketRepository.findAll().stream().filter(t->t.equals(uuid)).findFirst().get();
+    }
+
+
 }

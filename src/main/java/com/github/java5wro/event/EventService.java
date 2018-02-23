@@ -34,10 +34,10 @@ public class EventService {
         return entities.stream().map(this::toDto).collect(Collectors.toList());
     }
 
-    public void addEvent (Event event) {
-        checkNotNull(event, "Event cannot be null");
-        checkArgument(event.getId() == null, "If event is to be added, id has to be null");
-        repository.save(event);
+    public void addEvent (EventDto eventDto) {
+        checkNotNull(eventDto, "Event cannot be null");
+        checkArgument(eventDto.getId() == null, "If event is to be added, id has to be null");
+        repository.save(toEntity(eventDto));
     }
 
     public List<EventDto> findAllEvents (){
