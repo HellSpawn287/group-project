@@ -1,11 +1,11 @@
 package com.github.java5wro.event;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.github.java5wro.ticket.TicketEntity;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -25,6 +25,8 @@ public class Event {
     private Integer price;
     @NotNull
     private Long author;
+    @OneToMany (mappedBy = "event")
+    private List<TicketEntity> participants;
 
     protected Event() {
     }

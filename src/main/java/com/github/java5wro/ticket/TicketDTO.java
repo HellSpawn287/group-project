@@ -1,41 +1,29 @@
 package com.github.java5wro.ticket;
 
-
 import com.github.java5wro.event.Event;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-@Entity
-public class TicketEntity {
 
+/**
+ * Created by Lenovo on 2018-02-20.
+ */
+public class TicketDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    @NotNull
     private String uuid;
-    @NotNull
-    @ManyToOne
     private Event event;
-    @NotNull
     private LocalDate purchaseDate;
-    @NotNull
     private Long owner;
 
-    protected TicketEntity() {
+    public TicketDTO() {
     }
 
-    public TicketEntity(String uuid, Event event, LocalDate purchaseDate, Long owner) {
+    public TicketDTO(String uuid, Event event, LocalDate purchaseDate, Long owner) {
         this.uuid = uuid;
         this.event = event;
         this.purchaseDate = purchaseDate;
         this.owner = owner;
     }
 
-    public Long getId() {
-        return id;
-    }
 
     public String getUuid() {
         return uuid;
@@ -67,5 +55,33 @@ public class TicketEntity {
 
     public void setOwner(Long owner) {
         this.owner = owner;
+    }
+
+    @Override
+    public String toString() {
+        return "TicketDTO{" +
+                ", event=" + event +
+                ", purchaseDate=" + purchaseDate +
+                ", owner=" + owner +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TicketDTO ticketDTO = (TicketDTO) o;
+
+        if (uuid != null ? !uuid.equals(ticketDTO.uuid) : ticketDTO.uuid != null) {
+            return false;
+        }
+        return true;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return uuid.hashCode();
     }
 }

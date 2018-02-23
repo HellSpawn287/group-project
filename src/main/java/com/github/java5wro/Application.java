@@ -1,6 +1,6 @@
 package com.github.java5wro;
 
-import com.github.java5wro.user.model.User;
+import com.github.java5wro.email.EmailService;
 import com.github.java5wro.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -13,20 +13,29 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.util.UUID;
+import java.io.IOException;
 
 import static springfox.documentation.builders.PathSelectors.regex;
 
 
 @EnableSwagger2
 @SpringBootApplication
-public class Application implements CommandLineRunner {
+public class Application {
 
     @Autowired
     private UserRepository userRepository;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         SpringApplication.run(Application.class, args);
+
+
+    }
+
+    @Bean
+    CommandLineRunner commandLineRunner (EmailService es) {
+        return args -> {
+//            es.sendEmail("javawro5@gmail.com", "test2", "Thank you for using our service. \n Please find attached ticket and invoice.\n Love \n Krzysiu <3");
+        };
     }
 
     @Bean
@@ -49,10 +58,4 @@ public class Application implements CommandLineRunner {
                 .build();
     }
 
-    @Override
-    public void run(String... strings) throws Exception {
-
-        String uuid = UUID.randomUUID().toString();
-        userRepository.save(new User(1L,"randomUser","user","randomUser@gmail.com","password", "unknown"));
-    }
 }
