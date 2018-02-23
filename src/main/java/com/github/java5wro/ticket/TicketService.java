@@ -1,6 +1,7 @@
 package com.github.java5wro.ticket;
 
 import com.github.java5wro.email.EmailService;
+import com.github.java5wro.event.EventEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import com.github.java5wro.event.Event;
 import com.github.java5wro.user.model.User;
@@ -36,13 +37,16 @@ public class TicketService {
     }
 
     private TicketEntity toEntity(TicketDTO ticketDTO) {
-        return new TicketEntity(ticketDTO.getId(), ticketDTO.getUuid(), ticketDTO.getEvent(), ticketDTO.getPurchaseDate(), ticketDTO.getOwner());
+
+        EmailService email = new EmailService(javaMailSender);
+        TicketForEmail ticketForEmail= new TicketForEmail(ticketDTO);
+
+        email.sendEmail( ticketForEmail.getUsername(), ticketForEmail.getEventName(), ticketForEmail.getUuid(), ticketForEmail.getPrice(),ticketForEmail.getPurchaseDate() ,ticketForEmail.getEmail());
+
+              return new TicketEntity(ticketDTO.getId(), ticketDTO.getUuid(), ticketDTO.getEvent(), ticketDTO.getPurchaseDate(), ticketDTO.getOwner().getId());
     }
 
     private TicketDTO toTicketDTO(TicketEntity entity) throws IOException {
-
-        EmailService email = new EmailService(javaMailSender);
-        email.sendEmail(entity.getOwner().getName(), entity.getEvent().getName(), entity.getUuid(), entity.getEvent().getPrice().toString(), entity.getPurchaseDate().toString(), entity.getOwner().getEmail());
 
         return new TicketDTO(entity.getId(), entity.getUuid(), entity.getEvent(), entity.getPurchaseDate(), entity.getOwner());
     }
@@ -62,7 +66,7 @@ public class TicketService {
         }
         return set;
     }
-    public Set<TicketEntity> findByEvent(Event event){
+    public Set<TicketEntity> findByEvent(EventEntity event){
         HashSet<TicketEntity> set = new HashSet<>();
         for (TicketEntity temp:ticketRepository.findAll()) {
             if(temp.getEvent().equals(event))

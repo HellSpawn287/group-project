@@ -39,13 +39,6 @@ public class Application {
 
 
     @Bean
-    CommandLineRunner commandLineRunner (EmailService es) {
-        return args -> {
-            es.sendEmail("javawro5@gmail.com", "test2", "Thank you for using our service. \n Please find attached ticket and invoice.\n Love \n Krzysiu <3");
-        };
-    }
-
-    @Bean
     public Docket newsApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("java5wro")
