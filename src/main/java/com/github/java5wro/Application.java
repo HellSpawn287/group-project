@@ -1,18 +1,19 @@
 package com.github.java5wro;
 
 import com.github.java5wro.email.EmailService;
-import com.github.java5wro.user.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
+import com.github.java5wro.user.model.User;
+import com.github.java5wro.user.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 import static springfox.documentation.builders.PathSelectors.regex;
 
 
@@ -27,9 +28,13 @@ public class Application {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner (EmailService es) {
+    CommandLineRunner commandLineRunner (EmailService es, UserService us, PasswordEncoder encoder) {
         return args -> {
-//            es.sendEmail("javawro5@gmail.com", "test2", "Thank you for using our service. \n Please find attached ticket and invoice.\n Love \n Krzysiu <3");
+            es.sendEmail("javawro5@gmail.com", "test2", "Thank you for using our service. \n Please find attached ticket and invoice.\n Love \n Krzysiu <3");
+
+            us.saveUser(new User("User2","user2@gmail.com",encoder.encode("password2"),"USER"));
+
+
         };
     }
 
