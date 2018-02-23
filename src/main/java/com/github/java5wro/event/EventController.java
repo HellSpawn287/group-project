@@ -14,7 +14,7 @@ public class EventController {
     private EventService eventService;
 
     @GetMapping
-    public Set<Event> getEvents(){
+    public Set<EventEntity> getEvents(){
     return new HashSet<>();      // zwraca JSona
     }
 

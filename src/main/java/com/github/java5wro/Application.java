@@ -37,6 +37,7 @@ public class Application implements CommandLineRunner {
 
     }
 
+
     @Bean
     CommandLineRunner commandLineRunner (EmailService es) {
         return args -> {
