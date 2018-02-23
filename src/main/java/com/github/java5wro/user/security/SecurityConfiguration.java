@@ -1,5 +1,6 @@
 package com.github.java5wro.user.security;
 
+import com.github.java5wro.user.model.Role;
 import com.github.java5wro.user.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -23,9 +24,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("admin@admin.pl").password("admin1").roles("ADMIN")
+                .withUser("admin@admin.pl").password("admin1").roles(Role.ADMIN.toString())
                 .and()
-                .withUser("user@user.pl").password("user1").roles("USER");
+                .withUser("user@user.pl").password("user1").roles(Role.USER.toString());
     }
 
     @Bean
@@ -38,9 +39,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/start").permitAll()
-                .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/user").hasRole("USER")
+        http.authorizeRequests().antMatchers("/home").permitAll()
+                .antMatchers("/admin").hasRole(Role.ADMIN.toString())
+                .antMatchers("/user").hasRole(Role.USER.toString())
                 .anyRequest().authenticated();
         http.httpBasic();
     }
