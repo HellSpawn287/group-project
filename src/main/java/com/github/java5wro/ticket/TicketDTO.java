@@ -14,12 +14,12 @@ public class TicketDTO {
     private String uuid;
     private EventEntity event;
     private LocalDate purchaseDate;
-    private Integer owner;
+    private User owner;
 
     public TicketDTO() {
     }
 
-    public TicketDTO(Integer id, String uuid, EventEntity event, LocalDate purchaseDate, Integer owner) {
+    public TicketDTO(Integer id, String uuid, EventEntity event, LocalDate purchaseDate, User owner) {
         this.id = id;
         this.uuid = uuid;
         this.event = event;
@@ -59,11 +59,11 @@ public class TicketDTO {
         this.purchaseDate = purchaseDate;
     }
 
-    public Integer getOwner() {
+    public User getOwner() {
         return owner;
     }
 
-    public void setOwner(Integer owner) {
+    public void setOwner(User owner) {
         this.owner = owner;
     }
 
