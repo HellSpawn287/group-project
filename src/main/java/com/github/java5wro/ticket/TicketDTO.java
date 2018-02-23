@@ -2,6 +2,7 @@ package com.github.java5wro.ticket;
 
 import com.github.java5wro.event.Event;
 import com.github.java5wro.user.model.User;
+import io.swagger.models.auth.In;
 
 import java.time.LocalDate;
 
@@ -10,7 +11,7 @@ import java.time.LocalDate;
  */
 public class TicketDTO {
 
-    private Long id;
+    private Integer id;
     private String uuid;
     private Event event;
     private LocalDate purchaseDate;
@@ -19,7 +20,7 @@ public class TicketDTO {
     public TicketDTO() {
     }
 
-    public TicketDTO(Long id, String uuid, Event event, LocalDate purchaseDate, User owner) {
+    public TicketDTO(Integer id, String uuid, Event event, LocalDate purchaseDate, User owner) {
         this.id = id;
         this.uuid = uuid;
         this.event = event;
@@ -27,11 +28,11 @@ public class TicketDTO {
         this.owner = owner;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
