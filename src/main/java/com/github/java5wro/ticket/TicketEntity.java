@@ -1,8 +1,12 @@
-package com.github.java5wro.ticket.entity;
+package com.github.java5wro.ticket;
 
+
+import com.github.java5wro.event.Event;
+import com.github.java5wro.user.model.User;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -10,21 +14,23 @@ import java.time.LocalDate;
 public class TicketEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @NotNull
     private String uuid;
     @NotNull
-    private Long event;
+    private Event event;
     @NotNull
     private LocalDate purchaseDate;
     @NotNull
-    private Long owner;
+    private User owner;
 
     protected TicketEntity() {
     }
 
-    public TicketEntity(String uuid, Long event, LocalDate purchaseDate, Long owner) {
+
+    public TicketEntity(Integer id, String uuid, Event event, LocalDate purchaseDate, User owner) {
+        this.id = id;
         this.uuid = uuid;
         this.event = event;
         this.purchaseDate = purchaseDate;
@@ -47,11 +53,11 @@ public class TicketEntity {
         this.uuid = uuid;
     }
 
-    public Long getEvent() {
+    public Event getEvent() {
         return event;
     }
 
-    public void setEvent(Long event) {
+    public void setEvent(Event event) {
         this.event = event;
     }
 
@@ -63,11 +69,11 @@ public class TicketEntity {
         this.purchaseDate = purchaseDate;
     }
 
-    public Long getOwner() {
+    public User getOwner() {
         return owner;
     }
 
-    public void setOwner(Long owner) {
+    public void setOwner(User owner) {
         this.owner = owner;
     }
 }

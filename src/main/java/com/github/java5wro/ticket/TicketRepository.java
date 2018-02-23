@@ -1,6 +1,6 @@
-package com.github.java5wro.ticket.repository;
+package com.github.java5wro.ticket;
 
-import com.github.java5wro.ticket.entity.TicketEntity;
+import com.github.java5wro.ticket.TicketEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

@@ -1,7 +1,8 @@
-package com.github.java5wro.ticket.DTO;
+package com.github.java5wro.ticket;
 
 import com.github.java5wro.event.Event;
 import com.github.java5wro.user.model.User;
+
 
 import java.time.LocalDate;
 
@@ -9,16 +10,17 @@ import java.time.LocalDate;
  * Created by Lenovo on 2018-02-20.
  */
 public class TicketDTO {
+
     private Integer id;
     private String uuid;
-    private Long event;
+    private Event event;
     private LocalDate purchaseDate;
-    private Long owner;
+    private User owner;
 
     public TicketDTO() {
     }
 
-    public TicketDTO(Integer id, String uuid, Long event, LocalDate purchaseDate, Long owner) {
+    public TicketDTO(Integer id, String uuid, Event event, LocalDate purchaseDate, User owner) {
         this.id = id;
         this.uuid = uuid;
         this.event = event;
@@ -42,11 +44,11 @@ public class TicketDTO {
         this.uuid = uuid;
     }
 
-    public Long getEvent() {
+    public Event getEvent() {
         return event;
     }
 
-    public void setEvent(Long event) {
+    public void setEvent(Event event) {
         this.event = event;
     }
 
@@ -58,22 +60,12 @@ public class TicketDTO {
         this.purchaseDate = purchaseDate;
     }
 
-    public Long getOwner() {
+    public User getOwner() {
         return owner;
     }
 
-    public void setOwner(Long owner) {
+    public void setOwner(User owner) {
         this.owner = owner;
-    }
-
-    @Override
-    public String toString() {
-        return "TicketDTO{" +
-                "id=" + id +
-                ", event=" + event +
-                ", purchaseDate=" + purchaseDate +
-                ", owner=" + owner +
-                '}';
     }
 
     @Override
@@ -99,5 +91,16 @@ public class TicketDTO {
         result = 31 * result + (purchaseDate != null ? purchaseDate.hashCode() : 0);
         result = 31 * result + (owner != null ? owner.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "TicketDTO{" +
+                "id=" + id +
+                ", uuid='" + uuid + '\'' +
+                ", event=" + event +
+                ", purchaseDate=" + purchaseDate +
+                ", owner=" + owner +
+                '}';
     }
 }
