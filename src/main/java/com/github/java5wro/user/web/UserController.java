@@ -1,6 +1,7 @@
 package com.github.java5wro.user.web;
 
-import com.github.java5wro.user.model.User;
+import com.github.java5wro.user.model.UserEntity;
+import com.github.java5wro.user.model.UserMapper;
 import com.github.java5wro.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,13 +22,13 @@ public class UserController {
     }
 
     @GetMapping
-    public Set<User> getAllUsers() {
+    public Set<UserEntity> getAllUsers() {
         return new HashSet<>(userService.getAllUsers());
     }
 
     @PostMapping
-    public void createUser(@RequestBody @Valid User user) {
-        userService.saveUser(user);
+    public void createUser(@RequestBody @Valid UserMapper user) {
+        userService.saveUser(UserMapper.toUserEntity(user));
     }
 
 

@@ -1,7 +1,7 @@
 package com.github.java5wro;
 
 import com.github.java5wro.email.EmailService;
-import com.github.java5wro.user.model.User;
+import com.github.java5wro.user.model.UserEntity;
 import com.github.java5wro.user.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -32,7 +32,7 @@ public class Application {
         return args -> {
             es.sendEmail("javawro5@gmail.com", "test2", "Thank you for using our service. \n Please find attached ticket and invoice.\n Love \n Krzysiu <3");
 
-            us.saveUser(new User("User2","user2@gmail.com",encoder.encode("password2"),"USER"));
+            us.saveUser(new UserEntity("User2","user2@gmail.com",encoder.encode("password2"),"USER"));
 
 
         };
