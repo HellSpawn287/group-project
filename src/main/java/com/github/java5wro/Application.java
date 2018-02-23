@@ -53,6 +53,6 @@ public class Application implements CommandLineRunner {
     public void run(String... strings) throws Exception {
 
         String uuid = UUID.randomUUID().toString();
-        userRepository.save(new User(uuid,"randomUser","randomUser@gmail.com","password","user"));
+        userRepository.save(new User(1L,"randomUser","user","randomUser@gmail.com","password", "unknown"));
     }
 }
