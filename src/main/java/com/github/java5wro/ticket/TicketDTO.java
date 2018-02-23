@@ -2,7 +2,7 @@ package com.github.java5wro.ticket;
 
 import com.github.java5wro.event.Event;
 import com.github.java5wro.user.model.User;
-import io.swagger.models.auth.In;
+
 
 import java.time.LocalDate;
 
