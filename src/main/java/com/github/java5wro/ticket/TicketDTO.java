@@ -1,5 +1,8 @@
 package com.github.java5wro.ticket;
 
+import com.github.java5wro.event.Event;
+import com.github.java5wro.user.model.User;
+
 import java.time.LocalDate;
 
 /**
@@ -7,21 +10,30 @@ import java.time.LocalDate;
  */
 public class TicketDTO {
 
+    private Long id;
     private String uuid;
-    private Long event;
+    private Event event;
     private LocalDate purchaseDate;
-    private Long owner;
+    private User owner;
 
     public TicketDTO() {
     }
 
-    public TicketDTO(String uuid, Long event, LocalDate purchaseDate, Long owner) {
+    public TicketDTO(Long id, String uuid, Event event, LocalDate purchaseDate, User owner) {
+        this.id = id;
         this.uuid = uuid;
         this.event = event;
         this.purchaseDate = purchaseDate;
         this.owner = owner;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getUuid() {
         return uuid;
@@ -31,11 +43,11 @@ public class TicketDTO {
         this.uuid = uuid;
     }
 
-    public Long getEvent() {
+    public Event getEvent() {
         return event;
     }
 
-    public void setEvent(Long event) {
+    public void setEvent(Event event) {
         this.event = event;
     }
 
@@ -47,21 +59,12 @@ public class TicketDTO {
         this.purchaseDate = purchaseDate;
     }
 
-    public Long getOwner() {
+    public User getOwner() {
         return owner;
     }
 
-    public void setOwner(Long owner) {
+    public void setOwner(User owner) {
         this.owner = owner;
-    }
-
-    @Override
-    public String toString() {
-        return "TicketDTO{" +
-                ", event=" + event +
-                ", purchaseDate=" + purchaseDate +
-                ", owner=" + owner +
-                '}';
     }
 
     @Override
@@ -71,15 +74,32 @@ public class TicketDTO {
 
         TicketDTO ticketDTO = (TicketDTO) o;
 
-        if (uuid != null ? !uuid.equals(ticketDTO.uuid) : ticketDTO.uuid != null) {
+        if (id != null ? !id.equals(ticketDTO.id) : ticketDTO.id != null) return false;
+        if (uuid != null ? !uuid.equals(ticketDTO.uuid) : ticketDTO.uuid != null) return false;
+        if (event != null ? !event.equals(ticketDTO.event) : ticketDTO.event != null) return false;
+        if (purchaseDate != null ? !purchaseDate.equals(ticketDTO.purchaseDate) : ticketDTO.purchaseDate != null)
             return false;
-        }
-        return true;
-
+        return owner != null ? owner.equals(ticketDTO.owner) : ticketDTO.owner == null;
     }
 
     @Override
     public int hashCode() {
-        return uuid.hashCode();
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (uuid != null ? uuid.hashCode() : 0);
+        result = 31 * result + (event != null ? event.hashCode() : 0);
+        result = 31 * result + (purchaseDate != null ? purchaseDate.hashCode() : 0);
+        result = 31 * result + (owner != null ? owner.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "TicketDTO{" +
+                "id=" + id +
+                ", uuid='" + uuid + '\'' +
+                ", event=" + event +
+                ", purchaseDate=" + purchaseDate +
+                ", owner=" + owner +
+                '}';
     }
 }
