@@ -14,7 +14,7 @@ public class TicketForEmail {
     private String email;
 
     public TicketForEmail(TicketDTO ticket) {
-        this.username = ticket.getOwner().toString();
+        this.username = ticket.getOwner().getName();
         this.eventName = ticket.getEvent().toString();
         this.uuid = ticket.getUuid();
         this.price = ticket.getEvent().getPrice().toString();
