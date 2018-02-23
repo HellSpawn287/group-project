@@ -3,9 +3,6 @@ package com.github.java5wro.user.service;
 import com.github.java5wro.user.model.User;
 import com.github.java5wro.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +14,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;
+
 
 
     @Autowired
@@ -46,12 +44,12 @@ public class UserService {
         return userRepository.findOneByEmail(email);
     }
 
-    private void createSampleUser() {
-        if (!findByEmail("user@user.pl").isPresent()) {
-            User entity = new User("user@user.pl" ,encoder.encode("user1"),"USER");
-            userRepository.save(entity);
-        }
-    }
+//    private void createSampleUser() {
+//        if (!findByEmail("user@user.pl").isPresent()) {
+//            User entity = new User("user@user.pl" ,encoder.encode("user1"),"USER");
+//            userRepository.save(entity);
+//        }
+//    }
 
 
 }
