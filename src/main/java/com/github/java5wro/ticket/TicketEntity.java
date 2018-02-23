@@ -3,12 +3,17 @@ package com.github.java5wro.ticket;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 @Entity
 public class TicketEntity {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     @NotNull
     private String uuid;
     @NotNull
@@ -28,7 +33,9 @@ public class TicketEntity {
         this.owner = owner;
     }
 
-
+    public Long getId() {
+        return id;
+    }
 
     public String getUuid() {
         return uuid;
