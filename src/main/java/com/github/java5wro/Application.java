@@ -9,7 +9,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.io.IOException;
 import org.springframework.context.annotation.Bean;
@@ -26,12 +25,12 @@ import static springfox.documentation.builders.PathSelectors.regex;
 
 @EnableSwagger2
 @SpringBootApplication
-public class Application implements CommandLineRunner {
+public class Application {
 
     @Autowired
     private UserRepository userRepository;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
 
 
@@ -62,12 +61,5 @@ public class Application implements CommandLineRunner {
                 .license("Apache License Version 2.0")
                 .version("2.0")
                 .build();
-    }
-
-    @Override
-    public void run(String... strings) throws Exception {
-
-        String uuid = UUID.randomUUID().toString();
-        userRepository.save(new User(uuid,"randomUser","randomUser@gmail.com","password","user"));
     }
 }

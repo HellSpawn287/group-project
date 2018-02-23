@@ -50,6 +50,7 @@ public class InvoiceGenerator {
         try {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             workbook.write(outputStream);
+            workbook.close();
             return outputStream.toByteArray();
         } catch (FileNotFoundException e) {
             e.printStackTrace();

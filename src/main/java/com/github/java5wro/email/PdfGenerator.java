@@ -77,6 +77,7 @@ public class PdfGenerator {
         document.save("Ticket.pdf");
         ByteArrayOutputStream attachement = new ByteArrayOutputStream();
         document.save(attachement);
+        document.close();
         return attachement.toByteArray();
 
 
