@@ -32,6 +32,8 @@ public class UserEntity {
         this.role = role;
     }
 
+
+
     public Integer getId() {
         return id;
     }

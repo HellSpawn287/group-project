@@ -36,7 +36,7 @@ public class TicketService {
     }
 
     private TicketDTO toTicketDTO(TicketEntity entity) {
-        return new TicketDTO(entity.getId(), entity.getUuid(), entity.getEvent(), entity.getPurchaseDate(), entity.getOwner() == null ? " " : entity.getOwner().getName());
+        return new TicketDTO(entity.getId(), entity.getUuid(), entity.getEvent(), entity.getOwner() == null ? " " : entity.getOwner().getName());
     }
 
     public Set<TicketEntity> findAll() {

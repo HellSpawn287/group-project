@@ -26,6 +26,13 @@ public class TicketDTO {
         this.owner = owner;
     }
 
+    public TicketDTO(Integer id, String uuid, EventEntity event, String owner) {
+        this.id = id;
+        this.uuid = uuid;
+        this.event = event;
+        this.owner = owner;
+    }
+
     public TicketDTO(Integer id, String uuid, EventEntity event, LocalDate purchaseDate) {
         this.id = id;
         this.uuid = uuid;

@@ -1,22 +1,25 @@
 package com.github.java5wro;
 
 import com.github.java5wro.email.EmailService;
-import org.springframework.boot.CommandLineRunner;
+import com.github.java5wro.event.EventEntity;
+import com.github.java5wro.event.EventRepository;
+import com.github.java5wro.ticket.TicketEntity;
+import com.github.java5wro.ticket.TicketRepository;
 import com.github.java5wro.user.model.UserEntity;
 import com.github.java5wro.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import java.io.IOException;
-
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import static springfox.documentation.builders.PathSelectors.regex;
@@ -28,6 +31,12 @@ public class Application implements CommandLineRunner {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private EventRepository eventRepository;
+
+    @Autowired
+    private TicketRepository ticketRepository;
 
     public static void main(String[] args) throws IOException {
         SpringApplication.run(Application.class, args);
@@ -66,7 +75,14 @@ public class Application implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
 
-        String uuid = UUID.randomUUID().toString();
-        userRepository.save(new UserEntity(uuid,"randomUser","randomUser@gmail.com","password","user"));
+        UserEntity userEntity = new UserEntity(UUID.randomUUID().toString(),"randomUser","randomUser@gmail.com","password","user");
+        userRepository.save(userEntity);
+
+        EventEntity eventEntity = new EventEntity(UUID.randomUUID().toString(), "Festyn w Pcimiu", LocalDate.now(), "cool event", 30, Integer.toUnsignedLong(1));
+        eventRepository.save(eventEntity);
+
+
+        ticketRepository.save(new TicketEntity(UUID.randomUUID().toString(), eventEntity, LocalDate.now(), userEntity ));
+
     }
 }

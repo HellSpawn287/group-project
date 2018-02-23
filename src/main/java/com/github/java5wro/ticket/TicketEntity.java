@@ -18,8 +18,8 @@ public class TicketEntity {
     @ManyToOne
     private EventEntity event;
     @NotNull
-    private LocalDate purchaseDate;
-    @OneToOne
+    private String purchaseDate;
+    @ManyToOne
     private UserEntity owner;
 
     protected TicketEntity() {
@@ -30,7 +30,14 @@ public class TicketEntity {
         this.id = id;
         this.uuid = uuid;
         this.event = event;
-        this.purchaseDate = purchaseDate;
+        this.purchaseDate = purchaseDate.toString();
+        this.owner = owner;
+    }
+
+    public TicketEntity(String uuid, EventEntity event, LocalDate purchaseDate, UserEntity owner) {
+        this.uuid = uuid;
+        this.event = event;
+        this.purchaseDate = purchaseDate.toString();
         this.owner = owner;
     }
 
@@ -38,9 +45,15 @@ public class TicketEntity {
         this.id = id;
         this.uuid = uuid;
         this.event = event;
-        this.purchaseDate = purchaseDate;
+        this.purchaseDate = purchaseDate.toString();
     }
 
+    public TicketEntity(Integer id, String uuid, EventEntity event, UserEntity owner) {
+        this.id = id;
+        this.uuid = uuid;
+        this.event = event;
+        this.owner = owner;
+    }
 
     public Integer getId() {
         return id;
@@ -66,12 +79,12 @@ public class TicketEntity {
         this.event = event;
     }
 
-    public LocalDate getPurchaseDate() {
+    public String getPurchaseDate() {
         return purchaseDate;
     }
 
     public void setPurchaseDate(LocalDate purchaseDate) {
-        this.purchaseDate = purchaseDate;
+        this.purchaseDate = purchaseDate.toString();
     }
 
     public UserEntity getOwner() {

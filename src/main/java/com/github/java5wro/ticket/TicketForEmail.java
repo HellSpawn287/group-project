@@ -2,9 +2,6 @@ package com.github.java5wro.ticket;
 
 import java.time.LocalDate;
 
-/**
- * Created by Lenovo on 2018-02-23.
- */
 public class TicketForEmail {
     private String username;
     private String eventName;
