@@ -14,12 +14,8 @@ import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class PdfGenerator {
-    public static void main(String[] args) throws IOException {
-        PdfGenerator stefan = new PdfGenerator();
-        stefan.createPdf();
-    }
 
-    public byte[] createPdf() throws IOException {
+    public byte[] createPdf(String name,String eventName, String uuid ) throws IOException {
 
 
         // Create a document and add a page to it
@@ -35,7 +31,7 @@ public class PdfGenerator {
 
 // Define a text content stream using the selected font, moving the cursor and drawing the text "Hello World"
 
-        String eventTitle = "***Event name***";
+        String eventTitle = eventName;
 
 
 // EVENT
@@ -61,12 +57,12 @@ public class PdfGenerator {
         contentStream.beginText();
         contentStream.setFont(font, 16);
         contentStream.moveTextPositionByAmount(100, 610);
-        contentStream.drawString("*** USER NAME ***");
+        contentStream.drawString(name);
         contentStream.endText();
 
         QRCodeGenerator qr = new QRCodeGenerator();
 
-        PDImageXObject codeImage = PDImageXObject.createFromByteArray(document, qr.QrGenerator("UUID"), "ticket");
+        PDImageXObject codeImage = PDImageXObject.createFromByteArray(document, qr.QrGenerator(uuid), "ticket");
 
         contentStream.drawImage(codeImage,180, 50);
 // Make sure that the content stream is closed:
