@@ -1,5 +1,7 @@
 package com.github.java5wro.ticket;
 
+import com.github.java5wro.event.Event;
+import com.github.java5wro.user.model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -43,6 +45,22 @@ public class TicketService {
 
     public TicketEntity findByUUID(String uuid){
         return ticketRepository.findAll().stream().filter(t->t.equals(uuid)).findFirst().get();
+    }
+    public Set<TicketEntity> findByUser(User user){
+        HashSet<TicketEntity> set = new HashSet<>();
+        for (TicketEntity temp:ticketRepository.findAll()) {
+            if(temp.getOwner().equals(user))
+                set.add(temp);
+        }
+        return set;
+    }
+    public Set<TicketEntity> findByEvent(Event event){
+        HashSet<TicketEntity> set = new HashSet<>();
+        for (TicketEntity temp:ticketRepository.findAll()) {
+            if(temp.getEvent().equals(event))
+                set.add(temp);
+        }
+        return set;
     }
 
 
