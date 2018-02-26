@@ -7,12 +7,12 @@ public class EventDto {
     private Long id;
     private String uuid;
     private String name;
-    private LocalDateTime time;
+    private LocalDate time;
     private String description;
     private Integer price;
     private Long author;
 
-    public EventDto(Long id, String uuid, String name, LocalDateTime time, String description, Integer price, Long author) {
+    public EventDto(Long id, String uuid, String name, LocalDate time, String description, Integer price, Long author) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
@@ -56,11 +56,11 @@ public class EventDto {
         this.name = name;
     }
 
-    public LocalDateTime getTime() {
+    public LocalDate getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(LocalDate time) {
         this.time = time;
     }
 
