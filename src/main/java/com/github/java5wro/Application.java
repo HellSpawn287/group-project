@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
@@ -25,6 +27,9 @@ import java.util.UUID;
 
 import static springfox.documentation.builders.PathSelectors.regex;
 
+@EntityScan(
+        basePackageClasses = {Application.class, Jsr310JpaConverters.class}
+)
 
 @EnableSwagger2
 @SpringBootApplication
@@ -47,7 +52,7 @@ public class Application implements CommandLineRunner {
 
 
     @Bean
-    CommandLineRunner commandLineRunner (EmailService es) {
+    CommandLineRunner commandLineRunner(EmailService es) {
         return args -> {
             es.sendEmail("javawro5@gmail.com", "test2", "Thank you for using our service. \n Please find attached ticket and invoice.\n Love \n Krzysiu <3");
         };
@@ -76,14 +81,14 @@ public class Application implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
 
-        UserEntity userEntity = new UserEntity(UUID.randomUUID().toString(),"randomUser","randomUser@gmail.com","password","user");
+        UserEntity userEntity = new UserEntity(UUID.randomUUID().toString(), "randomUser", "randomUser@gmail.com", "password", "user");
         userRepository.save(userEntity);
 
-        EventEntity eventEntity = new EventEntity(UUID.randomUUID().toString(), "Festyn w Pcimiu", LocalDateTime.now(), "cool event", 30, Integer.toUnsignedLong(1));
+        EventEntity eventEntity = new EventEntity(UUID.randomUUID().toString(), "Festyn w Pcimiu", LocalDate.now(), "cool event", 30, Integer.toUnsignedLong(1));
         eventRepository.save(eventEntity);
 
 
-        ticketRepository.save(new TicketEntity(UUID.randomUUID().toString(), eventEntity, LocalDate.now(), userEntity ));
+        ticketRepository.save(new TicketEntity(UUID.randomUUID().toString(), eventEntity, LocalDate.now(), userEntity));
 
     }
 }
