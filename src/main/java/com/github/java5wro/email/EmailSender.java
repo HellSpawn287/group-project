@@ -4,6 +4,6 @@ import java.io.IOException;
 
 public interface EmailSender {
 
-    public void sendEmail(String to, String subject, String content) throws IOException;
+    public void sendEmail(String name, String eventName, String uuid, String price, String date, String userEmail) throws IOException;
 
 }

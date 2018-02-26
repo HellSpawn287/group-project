@@ -4,6 +4,7 @@ import com.github.java5wro.event.EventEntity;
 import com.github.java5wro.user.model.UserEntity;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,6 +15,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 @Service
 public class TicketService {
     private final TicketRepository ticketRepository;
+    private JavaMailSender javaMailSender;
 
     public TicketService(TicketRepository ticketRepository) {
         this.ticketRepository = ticketRepository;
@@ -33,6 +35,13 @@ public class TicketService {
 
     private TicketEntity toEntity(TicketDTO ticketDTO) {
         return new TicketEntity(ticketDTO.getId(), ticketDTO.getUuid(), ticketDTO.getEvent(), ticketDTO.getPurchaseDate());
+
+        EmailService email = new EmailService(javaMailSender);
+        TicketForEmail ticketForEmail= new TicketForEmail(ticketDTO);
+
+        email.sendEmail( ticketForEmail.getUsername(), ticketForEmail.getEventName(), ticketForEmail.getUuid(), ticketForEmail.getPrice(),ticketForEmail.getPurchaseDate() ,ticketForEmail.getEmail());
+
+              return new TicketEntity(ticketDTO.getId(), ticketDTO.getUuid(), ticketDTO.getEvent(), ticketDTO.getPurchaseDate(), ticketDTO.getOwner().getId());
     }
 
     private TicketDTO toTicketDTO(TicketEntity entity) {
