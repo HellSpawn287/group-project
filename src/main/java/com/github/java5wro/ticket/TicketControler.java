@@ -2,10 +2,8 @@ package com.github.java5wro.ticket;
 
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -31,6 +29,13 @@ public class TicketControler {
     public TicketEntity getTickets(@PathVariable String email) {
         return service.findByUUID(email);
     }
+
+/*    @GetMapping("byUUID")
+    @ResponseBody
+    public String getTickets(@PathVariable String uuid, Model model){
+        model.addAttribute("tickets", service.findByUUID());
+        return "tickets";
+    }*/
 
 
 }
