@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -18,7 +19,7 @@ public class EventEntity {
     @NotNull
     private String name;
     @NotNull
-    private LocalDate time;
+    private String time;
     @NotNull
     private String description;
     @NotNull
@@ -29,10 +30,10 @@ public class EventEntity {
     protected EventEntity() {
     }
 
-    public EventEntity(String uuid, String name, LocalDate time, String description, Integer price, Long author) {
+    public EventEntity(String uuid, String name, LocalDateTime time, String description, Integer price, Long author) {
         this.uuid = uuid;
         this.name = name;
-        this.time = time;
+        this.time = time.toString();
         this.description = description;
         this.price = price;
         this.author = author;
@@ -70,11 +71,11 @@ public class EventEntity {
         this.name = name;
     }
 
-    public LocalDate getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(LocalDate time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

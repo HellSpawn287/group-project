@@ -20,6 +20,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static springfox.documentation.builders.PathSelectors.regex;
@@ -78,7 +79,7 @@ public class Application implements CommandLineRunner {
         UserEntity userEntity = new UserEntity(UUID.randomUUID().toString(),"randomUser","randomUser@gmail.com","password","user");
         userRepository.save(userEntity);
 
-        EventEntity eventEntity = new EventEntity(UUID.randomUUID().toString(), "Festyn w Pcimiu", LocalDate.now(), "cool event", 30, Integer.toUnsignedLong(1));
+        EventEntity eventEntity = new EventEntity(UUID.randomUUID().toString(), "Festyn w Pcimiu", LocalDateTime.now(), "cool event", 30, Integer.toUnsignedLong(1));
         eventRepository.save(eventEntity);
 
 
