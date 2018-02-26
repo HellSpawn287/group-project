@@ -2,20 +2,19 @@ package com.github.java5wro.user.model;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.UUID;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.*;
 
 @Entity
 @Table(name = "users")
-public class User implements UserDetails{
+public class UserEntity implements UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,24 +31,24 @@ public class User implements UserDetails{
     @NotBlank
     private String role;
 
-    protected User(){}
+    @Autowired
+    private PasswordEncoder encoder;
 
+    protected UserEntity(){}
 
-
-    public User(String email, String password, String role) {
+    public UserEntity(String email, String password, String role) {
         this.email = email;
-        this.password = password;
+        this.password = encoder.encode(password);
         this.role = role;
     }
 
-    public User(String name, String email, String password, String role) {
+    public UserEntity(String name, String email, String password, String role) {
 
         this.name = name;
         this.email = email;
-        this.password = password;
+        this.password = encoder.encode(password);
         this.role = role;
     }
-
 
     public Long getId() {
         return id;
@@ -118,7 +117,7 @@ public class User implements UserDetails{
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = encoder.encode(password);
     }
 
     public String getRole() {
@@ -131,7 +130,7 @@ public class User implements UserDetails{
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserEntity{" +
                 "id=" + id +
                 ", uuid='" + uuid + '\'' +
                 ", name='" + name + '\'' +
