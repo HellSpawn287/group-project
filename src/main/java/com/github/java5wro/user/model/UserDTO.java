@@ -1,8 +1,6 @@
 package com.github.java5wro.user.model;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class UserDTO {
 
@@ -15,13 +13,10 @@ public class UserDTO {
     @NotBlank
     private String confirmPassword;
 
-    @Autowired
-    private PasswordEncoder encoder;
-
     public UserDTO(String name, String email, String password) {
         this.name = name;
         this.email = email;
-        this.password = encoder.encode(password);
+        this.password = password;
     }
 
     public String getName() {
@@ -45,7 +40,7 @@ public class UserDTO {
     }
 
     public void setPassword(String password) {
-        this.password = encoder.encode(password);
+        this.password = password;
     }
 
     public String getConfirmPassword() {
@@ -53,7 +48,7 @@ public class UserDTO {
     }
 
     public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = encoder.encode(confirmPassword);
+        this.confirmPassword = confirmPassword;
     }
 
     @Override
