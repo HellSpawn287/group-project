@@ -2,8 +2,10 @@ package com.github.java5wro.user.model;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -29,11 +31,14 @@ public class UserEntity implements UserDetails{
     @NotBlank
     private String role;
 
+    @Autowired
+    private PasswordEncoder encoder;
+
     protected UserEntity(){}
 
     public UserEntity(String email, String password, String role) {
         this.email = email;
-        this.password = password;
+        this.password = encoder.encode(password);
         this.role = role;
     }
 
@@ -41,7 +46,7 @@ public class UserEntity implements UserDetails{
 
         this.name = name;
         this.email = email;
-        this.password = password;
+        this.password = encoder.encode(password);
         this.role = role;
     }
 
@@ -112,7 +117,7 @@ public class UserEntity implements UserDetails{
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = encoder.encode(password);
     }
 
     public String getRole() {
