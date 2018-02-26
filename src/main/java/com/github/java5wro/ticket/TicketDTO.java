@@ -1,29 +1,43 @@
-package com.github.java5wro.ticket.DTO;
+package com.github.java5wro.ticket;
 
-import com.github.java5wro.event.Event;
-import com.github.java5wro.user.model.User;
+import com.github.java5wro.event.EventEntity;
+import com.github.java5wro.user.model.UserEntity;
 
+import java.security.acl.Owner;
 import java.time.LocalDate;
 
-/**
- * Created by Lenovo on 2018-02-20.
- */
+
 public class TicketDTO {
+
     private Integer id;
     private String uuid;
-    private Long event;
+    private EventEntity event;
     private LocalDate purchaseDate;
-    private Long owner;
+    private String owner;
 
     public TicketDTO() {
     }
 
-    public TicketDTO(Integer id, String uuid, Long event, LocalDate purchaseDate, Long owner) {
+    public TicketDTO(Integer id, String uuid, EventEntity event, LocalDate purchaseDate, String owner) {
         this.id = id;
         this.uuid = uuid;
         this.event = event;
         this.purchaseDate = purchaseDate;
         this.owner = owner;
+    }
+
+    public TicketDTO(Integer id, String uuid, EventEntity event, String owner) {
+        this.id = id;
+        this.uuid = uuid;
+        this.event = event;
+        this.owner = owner;
+    }
+
+    public TicketDTO(Integer id, String uuid, EventEntity event, LocalDate purchaseDate) {
+        this.id = id;
+        this.uuid = uuid;
+        this.event = event;
+        this.purchaseDate = purchaseDate;
     }
 
     public Integer getId() {
@@ -42,11 +56,11 @@ public class TicketDTO {
         this.uuid = uuid;
     }
 
-    public Long getEvent() {
+    public EventEntity getEvent() {
         return event;
     }
 
-    public void setEvent(Long event) {
+    public void setEvent(EventEntity event) {
         this.event = event;
     }
 
@@ -58,22 +72,12 @@ public class TicketDTO {
         this.purchaseDate = purchaseDate;
     }
 
-    public Long getOwner() {
+    public String getOwner() {
         return owner;
     }
 
-    public void setOwner(Long owner) {
-        this.owner = owner;
-    }
-
-    @Override
-    public String toString() {
-        return "TicketDTO{" +
-                "id=" + id +
-                ", event=" + event +
-                ", purchaseDate=" + purchaseDate +
-                ", owner=" + owner +
-                '}';
+    public void setOwner(UserEntity owner) {
+        this.owner = owner.getName();
     }
 
     @Override
@@ -99,5 +103,16 @@ public class TicketDTO {
         result = 31 * result + (purchaseDate != null ? purchaseDate.hashCode() : 0);
         result = 31 * result + (owner != null ? owner.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "TicketDTO{" +
+                "id=" + id +
+                ", uuid='" + uuid + '\'' +
+                ", event=" + event +
+                ", purchaseDate=" + purchaseDate +
+                ", owner=" + owner +
+                '}';
     }
 }
