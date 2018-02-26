@@ -4,7 +4,6 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 import java.util.UUID;
 import javax.persistence.Entity;
@@ -34,8 +33,6 @@ public class User implements UserDetails{
 
     protected User(){}
 
-
-
     public User(String email, String password, String role) {
         this.email = email;
         this.password = password;
@@ -49,7 +46,6 @@ public class User implements UserDetails{
         this.password = password;
         this.role = role;
     }
-
 
     public Long getId() {
         return id;
