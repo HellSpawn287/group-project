@@ -3,6 +3,7 @@ package com.github.java5wro.ticket;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,6 +24,12 @@ public class TicketControler {
     @ResponseBody
     public Set<TicketEntity> getTickets() {
         return new HashSet<>(service.findAll());
+    }
+
+    @GetMapping("byEmail/{email}")
+    @ResponseBody
+    public TicketEntity getTickets(@PathVariable String email) {
+        return service.findByUUID(email);
     }
 
 

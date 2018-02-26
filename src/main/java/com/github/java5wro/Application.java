@@ -20,6 +20,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import javax.jws.soap.SOAPBinding;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -81,14 +82,16 @@ public class Application implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
 
+
+        //default
         UserEntity userEntity = new UserEntity(UUID.randomUUID().toString(), "randomUser", "randomUser@gmail.com", "password", "user");
         userRepository.save(userEntity);
 
         EventEntity eventEntity = new EventEntity(UUID.randomUUID().toString(), "Festyn w Pcimiu", LocalDate.now(), "cool event", 30, Integer.toUnsignedLong(1));
         eventRepository.save(eventEntity);
 
-
         ticketRepository.save(new TicketEntity(UUID.randomUUID().toString(), eventEntity, LocalDate.now(), userEntity));
+
 
     }
 }
