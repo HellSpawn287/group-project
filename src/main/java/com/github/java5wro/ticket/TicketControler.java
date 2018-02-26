@@ -30,12 +30,12 @@ public class TicketControler {
         return service.findByUUID(email);
     }
 
-/*    @GetMapping("byUUID")
+    @GetMapping("byUUID")
     @ResponseBody
     public String getTickets(@PathVariable String uuid, Model model){
-        model.addAttribute("tickets", service.findByUUID());
+       // model.addAttribute("tickets", service.findByUUID());
         return "tickets";
-    }*/
+    }
 
 
 }
