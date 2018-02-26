@@ -1,30 +1,43 @@
 package com.github.java5wro.ticket;
 
 import com.github.java5wro.event.EventEntity;
-import com.github.java5wro.user.model.User;
+import com.github.java5wro.user.model.UserEntity;
 
+import java.security.acl.Owner;
 import java.time.LocalDate;
 
-/**
- * Created by Lenovo on 2018-02-20.
- */
+
 public class TicketDTO {
 
     private Integer id;
     private String uuid;
     private EventEntity event;
     private LocalDate purchaseDate;
-    private User owner;
+    private String owner;
 
     public TicketDTO() {
     }
 
-    public TicketDTO(Integer id, String uuid, EventEntity event, LocalDate purchaseDate, User owner) {
+    public TicketDTO(Integer id, String uuid, EventEntity event, LocalDate purchaseDate, String owner) {
         this.id = id;
         this.uuid = uuid;
         this.event = event;
         this.purchaseDate = purchaseDate;
         this.owner = owner;
+    }
+
+    public TicketDTO(Integer id, String uuid, EventEntity event, String owner) {
+        this.id = id;
+        this.uuid = uuid;
+        this.event = event;
+        this.owner = owner;
+    }
+
+    public TicketDTO(Integer id, String uuid, EventEntity event, LocalDate purchaseDate) {
+        this.id = id;
+        this.uuid = uuid;
+        this.event = event;
+        this.purchaseDate = purchaseDate;
     }
 
     public Integer getId() {
@@ -59,12 +72,12 @@ public class TicketDTO {
         this.purchaseDate = purchaseDate;
     }
 
-    public User getOwner() {
+    public String getOwner() {
         return owner;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public void setOwner(UserEntity owner) {
+        this.owner = owner.getName();
     }
 
     @Override

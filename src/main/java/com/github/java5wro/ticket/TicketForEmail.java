@@ -2,9 +2,6 @@ package com.github.java5wro.ticket;
 
 import java.time.LocalDate;
 
-/**
- * Created by Lenovo on 2018-02-23.
- */
 public class TicketForEmail {
     private String username;
     private String eventName;
@@ -14,12 +11,12 @@ public class TicketForEmail {
     private String email;
 
     public TicketForEmail(TicketDTO ticket) {
-        this.username = ticket.getOwner().toString();
+        this.username = ticket.getOwner();
         this.eventName = ticket.getEvent().toString();
         this.uuid = ticket.getUuid();
         this.price = ticket.getEvent().getPrice().toString();
         this.purchaseDate = ticket.getPurchaseDate();
-        this.email = ticket.getOwner().getEmail();
+        this.email = ticket.getOwner();
     }
 
     public String getUsername() {

@@ -1,10 +1,10 @@
 package com.github.java5wro.user.repository;
 
-import com.github.java5wro.user.model.User;
+import com.github.java5wro.user.model.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User,Long> {
+public interface UserRepository extends JpaRepository<UserEntity,Long> {
 
 }

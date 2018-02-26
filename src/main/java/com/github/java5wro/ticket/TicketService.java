@@ -1,10 +1,7 @@
 package com.github.java5wro.ticket;
 
-import com.github.java5wro.email.EmailService;
 import com.github.java5wro.event.EventEntity;
-import org.springframework.mail.javamail.JavaMailSender;
-import com.github.java5wro.event.Event;
-import com.github.java5wro.user.model.User;
+import com.github.java5wro.user.model.UserEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -37,6 +34,7 @@ public class TicketService {
     }
 
     private TicketEntity toEntity(TicketDTO ticketDTO) {
+        return new TicketEntity(ticketDTO.getId(), ticketDTO.getUuid(), ticketDTO.getEvent(), ticketDTO.getPurchaseDate());
 
         EmailService email = new EmailService(javaMailSender);
         TicketForEmail ticketForEmail= new TicketForEmail(ticketDTO);
@@ -46,9 +44,8 @@ public class TicketService {
               return new TicketEntity(ticketDTO.getId(), ticketDTO.getUuid(), ticketDTO.getEvent(), ticketDTO.getPurchaseDate(), ticketDTO.getOwner().getId());
     }
 
-    private TicketDTO toTicketDTO(TicketEntity entity) throws IOException {
-
-        return new TicketDTO(entity.getId(), entity.getUuid(), entity.getEvent(), entity.getPurchaseDate(), entity.getOwner());
+    private TicketDTO toTicketDTO(TicketEntity entity) {
+        return new TicketDTO(entity.getId(), entity.getUuid(), entity.getEvent(), entity.getOwner() == null ? " " : entity.getOwner().getName());
     }
 
     public Set<TicketEntity> findAll() {
@@ -58,7 +55,7 @@ public class TicketService {
     public TicketEntity findByUUID(String uuid){
         return ticketRepository.findAll().stream().filter(t->t.equals(uuid)).findFirst().get();
     }
-    public Set<TicketEntity> findByUser(User user){
+    public Set<TicketEntity> findByUser(UserEntity user){
         HashSet<TicketEntity> set = new HashSet<>();
         for (TicketEntity temp:ticketRepository.findAll()) {
             if(temp.getOwner().equals(user))
