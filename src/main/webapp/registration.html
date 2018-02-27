@@ -5,6 +5,18 @@
 <html>
 <head>
     <title>User registration</title>
+
+    <style>
+        #newPasswordButton {
+            padding: 10px;
+            /*border:2px dashed red;*/
+            position: relative;
+            top: 200px
+
+        }
+
+    </style>
+
 </head>
 
 <body>
@@ -15,22 +27,41 @@
 
         user name:
         <br>
-        <input type="text" name="name">
+        <input type="text" name="name" required>
         <br><br>
         mail:
         <br>
-        <input type="text" name="mail">
+        <input type="text" name="mail" required>
         <br><br>
         password:
         <br>
-        <input type="password" name="password" required>
+        <input type="password" name="Password" required>
         <br><br>
-        repeat password
+        repeat password:
         <br>
-        <input type="password" name="repeatedpassword" required>
+        <input type="password" name="passwordRepeated" required>
         <br><br>
 
-        <button type="submit" name="choiceBaton" value="register">register</button>
+        <button type="submit" name="registerButton" value="register">register</button>
+
+
+        <br><br><br>
+
+
+        <div id="newPasswordButton">
+
+
+            Have you forgotten your password ?
+            <!--<form action="/api/users" method="post">-->
+                <!--<button type="submit" name="setNewPassword" value="setNewPassword">Set new password</button>-->
+
+
+            <button onclick="window.location.href='setNewPassword.html'">Set new password</button>
+
+
+            <!--</form>-->
+        </div>
+
     </form>
 </div>
 </body>
