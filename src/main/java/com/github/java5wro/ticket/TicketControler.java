@@ -1,6 +1,7 @@
 package com.github.java5wro.ticket;
 
 
+import com.github.java5wro.user.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +14,11 @@ import java.util.Set;
 public class TicketControler {
 
     private final TicketService service;
+    private final UserService userService;
 
-    public TicketControler(TicketService service) {
+    public TicketControler(TicketService service, UserService userService) {
         this.service = service;
+        this.userService=userService;
     }
 
     @GetMapping("all")
@@ -27,14 +30,13 @@ public class TicketControler {
     @GetMapping("byEmail/{email}")
     @ResponseBody
     public TicketEntity getTickets(@PathVariable String email) {
-        return service.findByUUID(email);
+        return service.findByUser(userService.findByEmail(email).get());
     }
 
     @GetMapping("byUUID")
     @ResponseBody
-    public String getTickets(@PathVariable String uuid, Model model){
-       // model.addAttribute("tickets", service.findByUUID());
-        return "tickets";
+    public TicketEntity getTicketsByUUID(@PathVariable String uuid){
+        return service.findByUUID(uuid);
     }
 
 

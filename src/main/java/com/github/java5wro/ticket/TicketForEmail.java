@@ -10,6 +10,7 @@ public class TicketForEmail {
     private LocalDate purchaseDate;
     private String email;
 
+
     public TicketForEmail(TicketDTO ticket) {
         this.username = ticket.getOwner();
         this.eventName = ticket.getEvent().toString();
