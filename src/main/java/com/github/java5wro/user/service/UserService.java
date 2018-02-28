@@ -34,8 +34,13 @@ public class UserService {
     }
 
     public void saveUser(UserDTO user) {
+
         UserEntity userEntity = new UserEntity(user.getName(),user.getEmail(),encoder.encode(user.getPassword()),"USER");
         userRepository.save(userEntity);
+    }
+
+    public UserDTO findUserByEmail(String email) {
+        return getAllUsers().stream().filter(u->u.getEmail().equals(email)).findFirst().get();
     }
 
     public Optional<UserEntity> findByEmail(String email) {
