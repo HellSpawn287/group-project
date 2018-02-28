@@ -35,14 +35,14 @@ public class PdfGenerator {
 
 // Define a text content stream using the selected font, moving the cursor and drawing the text "Hello World"
 
-        String eventTitle = "***Event name***";
+        String eventTitle = "***EventEntity name***";
 
 
 // EVENT
         contentStream.beginText();
         contentStream.setFont(font, 12);
         contentStream.moveTextPositionByAmount(100, 750);
-        contentStream.drawString("Event:");
+        contentStream.drawString("EventEntity:");
         contentStream.endText();
 
         contentStream.beginText();

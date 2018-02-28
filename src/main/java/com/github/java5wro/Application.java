@@ -32,7 +32,7 @@ public class Application {
     @Bean
     CommandLineRunner commandLineRunner (EmailService es, UserService us, PasswordEncoder encoder) {
         return args -> {
-            es.sendEmail("javawro5@gmail.com", "test2", "Thank you for using our service. \n Please find attached ticket and invoice.\n Love \n Krzysiu <3");
+//            es.sendEmail("javawro5@gmail.com", "test2", "Thank you for using our service. \n Please find attached ticket and invoice.\n Love \n Krzysiu <3");
             us.saveUser(new User("User2","user2@gmail.com",encoder.encode("password2"),"USER"));
         };
     }

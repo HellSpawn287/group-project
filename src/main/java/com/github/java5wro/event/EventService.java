@@ -1,5 +1,6 @@
 package com.github.java5wro.event;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,25 +13,26 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class EventService {
     private final EventRepository repository;
 
+    @Autowired
     public EventService(EventRepository repository) {
         this.repository = repository;
     }
 
-    private EventDto toDto(Event event) {
-        return new EventDto(event.getId(), event.getUuid(), event.getName(), event.getTime(),
-                event.getDescription(), event.getPrice(), event.getAuthor());
+    private EventDto toDto(EventEntity eventEntity) {
+        return new EventDto(eventEntity.getId(), eventEntity.getUuid(), eventEntity.getName(), eventEntity.getTime(),
+                eventEntity.getDescription(), eventEntity.getPrice(), eventEntity.getAuthor());
     }
 
-    private Event toEntity (EventDto eventDto) {
-        return new Event(eventDto.getUuid(), eventDto.getName(), eventDto.getTime(), eventDto.getDescription(),
+    private EventEntity toEntity (EventDto eventDto) {
+        return new EventEntity(eventDto.getUuid(), eventDto.getName(), eventDto.getTime(), eventDto.getDescription(),
             eventDto.getPrice(), eventDto.getAuthor());
     }
 
-    private List<Event> toEntity (List<EventDto> eventDtoList) {
+    private List<EventEntity> toEntity (List<EventDto> eventDtoList) {
         return eventDtoList.stream().map(this::toEntity).collect(Collectors.toList());
     }
 
-    private List<EventDto> toDto (List<Event> entities) {
+    private List<EventDto> toDto (List<EventEntity> entities) {
         return entities.stream().map(this::toDto).collect(Collectors.toList());
     }
 

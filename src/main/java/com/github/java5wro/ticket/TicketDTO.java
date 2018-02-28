@@ -1,6 +1,6 @@
 package com.github.java5wro.ticket;
 
-import com.github.java5wro.event.Event;
+import com.github.java5wro.event.EventEntity;
 
 import java.time.LocalDate;
 
@@ -10,16 +10,16 @@ import java.time.LocalDate;
 public class TicketDTO {
 
     private String uuid;
-    private Event event;
+    private EventEntity eventEntity;
     private LocalDate purchaseDate;
     private Long owner;
 
     public TicketDTO() {
     }
 
-    public TicketDTO(String uuid, Event event, LocalDate purchaseDate, Long owner) {
+    public TicketDTO(String uuid, EventEntity eventEntity, LocalDate purchaseDate, Long owner) {
         this.uuid = uuid;
-        this.event = event;
+        this.eventEntity = eventEntity;
         this.purchaseDate = purchaseDate;
         this.owner = owner;
     }
@@ -33,12 +33,12 @@ public class TicketDTO {
         this.uuid = uuid;
     }
 
-    public Event getEvent() {
-        return event;
+    public EventEntity getEvent() {
+        return eventEntity;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
+    public void setEvent(EventEntity eventEntity) {
+        this.eventEntity = eventEntity;
     }
 
     public LocalDate getPurchaseDate() {
@@ -60,7 +60,7 @@ public class TicketDTO {
     @Override
     public String toString() {
         return "TicketDTO{" +
-                ", event=" + event +
+                ", eventEntity=" + eventEntity +
                 ", purchaseDate=" + purchaseDate +
                 ", owner=" + owner +
                 '}';
