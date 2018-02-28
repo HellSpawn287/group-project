@@ -1,6 +1,7 @@
 package com.github.java5wro.event;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class EventDto {
     private Long id;
@@ -12,6 +13,16 @@ public class EventDto {
     private Long author;
 
     public EventDto(Long id, String uuid, String name, LocalDate time, String description, Integer price, Long author) {
+        this.id = id;
+        this.uuid = uuid;
+        this.name = name;
+        this.time = time;
+        this.description = description;
+        this.price = price;
+        this.author = author;
+    }
+
+    public EventDto(Long id, String uuid, String name, String description, Integer price, Long author) {
         this.id = id;
         this.uuid = uuid;
         this.name = name;
