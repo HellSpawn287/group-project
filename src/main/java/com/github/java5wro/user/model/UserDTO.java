@@ -13,6 +13,9 @@ public class UserDTO {
     @NotBlank
     private String confirmPassword;
 
+    public UserDTO() {
+    }
+
     public UserDTO(String name, String email, String password) {
         this.name = name;
         this.email = email;

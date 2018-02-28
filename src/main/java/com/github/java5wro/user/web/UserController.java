@@ -33,17 +33,10 @@ public class UserController {
         return userService.findUserById(Long.parseLong(userId));
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public void createUser(UserDTO userDTO) {
         userService.saveUser(userDTO);
     }
-
-//    @PostMapping
-//    public void changePassword(@RequestParam("email") String email, @RequestParam("setNewPassword") String newPassword) {
-//        UserDTO userToUpdate = userService.findUserByEmail(email);
-//        userToUpdate.setPassword(newPassword);
-//        userService.saveUser(userToUpdate);
-//    }
 
 
     @PostMapping("/resetPassword")
