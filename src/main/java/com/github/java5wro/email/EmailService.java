@@ -1,20 +1,13 @@
 package com.github.java5wro.email;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.InputStreamSource;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.mail.util.ByteArrayDataSource;
-import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 @Service
 public class EmailService implements EmailSender {
@@ -50,7 +43,7 @@ public class EmailService implements EmailSender {
             e.printStackTrace();
         }
 
-        javaMailSender.send(mail);
+     //   javaMailSender.send(mail);
     }
 }
 
