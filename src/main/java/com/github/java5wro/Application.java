@@ -1,61 +1,44 @@
 package com.github.java5wro;
 
 import com.github.java5wro.email.EmailService;
-import com.github.java5wro.event.EventEntity;
-import com.github.java5wro.event.EventRepository;
-import com.github.java5wro.ticket.TicketEntity;
-import com.github.java5wro.ticket.TicketRepository;
-import com.github.java5wro.user.model.UserEntity;
-import com.github.java5wro.user.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.github.java5wro.user.model.UserDTO;
+import com.github.java5wro.user.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import javax.jws.soap.SOAPBinding;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.UUID;
+import java.util.Properties;
 
 import static springfox.documentation.builders.PathSelectors.regex;
 
-@EntityScan(
-        basePackageClasses = {Application.class, Jsr310JpaConverters.class}
-)
 
 @EnableSwagger2
 @SpringBootApplication
-public class Application implements CommandLineRunner {
+public class Application {
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private EventRepository eventRepository;
-
-    @Autowired
-    private TicketRepository ticketRepository;
-
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
 
 
     }
 
-
     @Bean
-    CommandLineRunner commandLineRunner(EmailService es) {
+    CommandLineRunner commandLineRunner (EmailService es, UserService us, PasswordEncoder encoder) {
         return args -> {
             es.sendEmail("javawro5@gmail.com", "test2", "Thank you for using our service. \n Please find attached ticket and invoice.\n Love \n Krzysiu <3");
+
+            us.saveUser(new UserDTO("User","user@gmail.com","pass"));
+
+
         };
     }
 
@@ -79,19 +62,6 @@ public class Application implements CommandLineRunner {
                 .build();
     }
 
-    @Override
-    public void run(String... strings) throws Exception {
 
 
-        //default
-        UserEntity userEntity = new UserEntity(UUID.randomUUID().toString(), "randomUser", "randomUser@gmail.com", "password", "user");
-        userRepository.save(userEntity);
-
-        EventEntity eventEntity = new EventEntity(UUID.randomUUID().toString(), "Festyn w Pcimiu", LocalDate.now(), "cool event", 30, Integer.toUnsignedLong(1));
-        eventRepository.save(eventEntity);
-
-        ticketRepository.save(new TicketEntity(UUID.randomUUID().toString(), eventEntity, LocalDate.now(), userEntity));
-
-
-    }
 }
