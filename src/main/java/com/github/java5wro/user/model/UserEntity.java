@@ -28,6 +28,10 @@ public class UserEntity implements UserDetails{
     private String password;
     @NotBlank
     private String role;
+    @Column(name = "enabled")
+    private boolean enabled;
+
+
 
     protected UserEntity(){}
 
@@ -43,6 +47,7 @@ public class UserEntity implements UserDetails{
         this.email = email;
         this.password = password;
         this.role = role;
+        this.enabled=false;
     }
 
     public Long getId() {
