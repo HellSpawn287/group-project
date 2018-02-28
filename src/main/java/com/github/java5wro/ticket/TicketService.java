@@ -2,10 +2,13 @@ package com.github.java5wro.ticket;
 
 import com.github.java5wro.event.EventEntity;
 import com.github.java5wro.user.model.UserEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import sun.plugin.liveconnect.SecurityContextHelper;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -61,6 +64,14 @@ public class TicketService {
                 set.add(temp);
         }
         return set;
+    }
+
+    public Set<TicketDTO> findLoggedUsersTickets() {
+
+        UserEntity loggedUser = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return ticketRepository.findAllByOwnerUuid(loggedUser.getUuid()).stream()
+                .map(this::toTicketDTO)
+                .collect(Collectors.toSet());
     }
 
 
