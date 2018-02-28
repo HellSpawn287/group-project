@@ -48,13 +48,6 @@ public class TicketEntity {
         this.purchaseDate = purchaseDate;
     }
 
-    public TicketEntity(Integer id, String uuid, EventEntity event, UserEntity owner) {
-        this.id = id;
-        this.uuid = uuid;
-        this.event = event;
-        this.owner = owner;
-    }
-
     public Integer getId() {
         return id;
     }

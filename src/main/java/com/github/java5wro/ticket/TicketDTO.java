@@ -13,12 +13,12 @@ public class TicketDTO {
     private String uuid;
     private EventEntity event;
     private LocalDate purchaseDate;
-    private String owner;
+    private UserEntity owner;
 
     public TicketDTO() {
     }
 
-    public TicketDTO(Integer id, String uuid, EventEntity event, LocalDate purchaseDate, String owner) {
+    public TicketDTO(Integer id, String uuid, EventEntity event, LocalDate purchaseDate, UserEntity owner) {
         this.id = id;
         this.uuid = uuid;
         this.event = event;
@@ -26,7 +26,7 @@ public class TicketDTO {
         this.owner = owner;
     }
 
-    public TicketDTO(Integer id, String uuid, EventEntity event, String owner) {
+    public TicketDTO(Integer id, String uuid, EventEntity event, UserEntity owner) {
         this.id = id;
         this.uuid = uuid;
         this.event = event;
@@ -72,12 +72,12 @@ public class TicketDTO {
         this.purchaseDate = purchaseDate;
     }
 
-    public String getOwner() {
+    public UserEntity getOwner() {
         return owner;
     }
 
     public void setOwner(UserEntity owner) {
-        this.owner = owner.getName();
+        this.owner = owner;
     }
 
     @Override
