@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
-
+/*
 @Entity
 public class VerificationToken {
     private static final int EXPIRATION = 60 * 24;
@@ -70,3 +70,4 @@ public class VerificationToken {
         this.expiryDate = expiryDate;
     }
 }
+*/

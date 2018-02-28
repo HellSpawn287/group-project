@@ -12,12 +12,12 @@ public class TicketForEmail {
 
 
     public TicketForEmail(TicketDTO ticket) {
-        this.username = ticket.getOwner();
+        this.username = ticket.getOwner().toString();
         this.eventName = ticket.getEvent().toString();
         this.uuid = ticket.getUuid();
         this.price = ticket.getEvent().getPrice().toString();
         this.purchaseDate = ticket.getPurchaseDate();
-        this.email = ticket.getOwner();
+        this.email = ticket.getOwner().getEmail();
     }
 
     public String getUsername() {

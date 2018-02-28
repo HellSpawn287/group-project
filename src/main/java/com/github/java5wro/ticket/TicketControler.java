@@ -1,6 +1,7 @@
 package com.github.java5wro.ticket;
 
 
+import com.github.java5wro.user.model.UserMapper;
 import com.github.java5wro.user.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +30,7 @@ public class TicketControler {
 
     @GetMapping("byEmail/{email}")
     @ResponseBody
-    public TicketEntity getTickets(@PathVariable String email) {
+    public Set<TicketEntity> getTickets(@PathVariable String email) {
         return service.findByUser(userService.findByEmail(email).get());
     }
 

@@ -22,21 +22,13 @@ public class TicketService {
     public void addNewTicket(TicketDTO ticketDTO) {
         checkNotNull(ticketDTO, "Ticket to add cannot be null");
         checkArgument(ticketDTO.getUuid() == null, "If ticket is to be added, it needs it's id to be null but is %s.", ticketDTO.getUuid());
-        ticketRepository.save(toEntity(ticketDTO));
+        ticketRepository.save(TicketMapper.toTicketEntity(ticketDTO));
     }
 
     public void edit(TicketDTO ticketDTO) {
         checkNotNull(ticketDTO, "Ticket to add cannot be null");
         checkArgument(ticketDTO.getUuid() != null, "If ticket is to be edited, it needs it's id to be set.");
-        ticketRepository.save(toEntity(ticketDTO));
-    }
-
-    private TicketEntity toEntity(TicketDTO ticketDTO) {
-        return new TicketEntity(ticketDTO.getId(), ticketDTO.getUuid(), ticketDTO.getEvent(), ticketDTO.getPurchaseDate());
-    }
-
-    private TicketDTO toTicketDTO(TicketEntity entity) {
-        return new TicketDTO(entity.getId(), entity.getUuid(), entity.getEvent(), entity.getOwner() == null ? " " : entity.getOwner().getName());
+        ticketRepository.save(TicketMapper.toTicketEntity(ticketDTO));
     }
 
     public Set<TicketEntity> findAll() {
