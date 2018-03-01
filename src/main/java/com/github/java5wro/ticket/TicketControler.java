@@ -40,5 +40,14 @@ public class TicketControler {
         return service.findByUUID(uuid);
     }
 
+    @PostMapping("/addTicket")
+    public void createTicket (TicketDTO ticketDTO){
+        service.addNewTicket(ticketDTO);
+    }
+    @PostMapping("/editTicket")
+    public void editTicket (TicketDTO ticketDTO){
+        service.edit(ticketDTO);
+    }
+
 
 }
