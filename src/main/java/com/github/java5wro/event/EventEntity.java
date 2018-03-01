@@ -1,8 +1,11 @@
 package com.github.java5wro.event;
 
 import com.github.java5wro.ticket.TicketEntity;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
@@ -13,17 +16,19 @@ public class EventEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotNull
+    @NotBlank
     private String uuid = UUID.randomUUID().toString();
-    @NotNull
+    @NotBlank
+    @Min(2)
     private String name;
-    @NotNull
+    @NotBlank
+    @Future
     private LocalDate time;
     @NotNull
     private String description;
-    @NotNull
+    @NotBlank
     private Integer price;
-    @NotNull
+    @NotBlank
     private Long author;
     @OneToMany (mappedBy = "event")
     private List<TicketEntity> participants;
@@ -37,14 +42,6 @@ public class EventEntity {
         this.time = time;
         this.description = description;
         this.price = price;
-        this.author = author;
-    }
-
-    public Long getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Long author) {
         this.author = author;
     }
 
@@ -96,6 +93,22 @@ public class EventEntity {
         this.price = price;
     }
 
+    public Long getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Long author) {
+        this.author = author;
+    }
+
+    public List<TicketEntity> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<TicketEntity> participants) {
+        this.participants = participants;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -122,18 +135,5 @@ public class EventEntity {
         result = 31 * result + (price != null ? price.hashCode() : 0);
         result = 31 * result + (author != null ? author.hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "EventEntity{" +
-                "id=" + id +
-                ", uuid='" + uuid + '\'' +
-                ", name='" + name + '\'' +
-                ", time=" + time +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                ", author=" + author +
-                '}';
     }
 }
