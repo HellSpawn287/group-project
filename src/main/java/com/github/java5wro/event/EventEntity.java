@@ -1,15 +1,16 @@
 package com.github.java5wro.event;
 
-import com.github.java5wro.ticket.TicketEntity;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-public class Event {
+public class EventEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -25,13 +26,11 @@ public class Event {
     private Integer price;
     @NotNull
     private Long author;
-    @OneToMany (mappedBy = "event")
-    private List<TicketEntity> participants;
 
-    protected Event() {
+    protected EventEntity() {
     }
 
-    public Event(String uuid, String name, LocalDate time, String description, Integer price, Long author) {
+    public EventEntity(String uuid, String name, LocalDate time, String description, Integer price, Long author) {
         this.uuid = uuid;
         this.name = name;
         this.time = time;

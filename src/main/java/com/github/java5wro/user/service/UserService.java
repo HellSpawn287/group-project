@@ -5,6 +5,8 @@ import com.github.java5wro.user.model.UserEntity;
 import com.github.java5wro.user.model.UserMapper;
 import com.github.java5wro.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -29,13 +31,12 @@ public class UserService {
 
     public void saveUserEntity(UserEntity userEntity) {
         userEntity.setPassword(encoder.encode(userEntity.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(userEntity, null));
         userRepository.save(userEntity);
     }
 
     public UserEntity findByEmail(String email) {
         return userRepository.findOneByEmail(email).get();
     }
-
-
 
 }
