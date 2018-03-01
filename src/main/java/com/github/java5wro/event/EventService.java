@@ -21,7 +21,7 @@ public class EventService {
     }
 
     private EventDto toDto(EventEntity event) {
-        return new EventDto(event.getId(), event.getUuid(), event.getName(), event.getTime(),
+        return new EventDto(event.getId(), event.getUuid(), event.getName(),
                 event.getDescription(), event.getPrice(), event.getAuthor());
     }
 
