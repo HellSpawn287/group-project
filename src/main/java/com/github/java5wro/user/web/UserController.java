@@ -1,8 +1,11 @@
 package com.github.java5wro.user.web;
 
 import com.github.java5wro.email.EmailService;
+import com.github.java5wro.user.VerificationToken;
 import com.github.java5wro.user.model.UserDTO;
+import com.github.java5wro.user.model.UserEntity;
 import com.github.java5wro.user.service.UserService;
+import com.github.java5wro.user.service.VerificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,11 +19,13 @@ public class UserController {
 
     private UserService userService;
     private EmailService emailService;
+    private VerificationService verificationService;
 
     @Autowired
-    public UserController(UserService userService, EmailService emailService) {
+    public UserController(UserService userService, EmailService emailService, VerificationService verificationService) {
         this.userService = userService;
         this.emailService = emailService;
+        this.verificationService = verificationService;
     }
 
     @GetMapping("/all")
@@ -28,23 +33,21 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/{id}")
-    public UserDTO getOneUser(@PathVariable("id") String userId) {
-        return userService.findUserById(Long.parseLong(userId));
+    @GetMapping("/add/{token}")
+    public void saveUser(@PathVariable("token") String token) {
+        VerificationToken foundToken = verificationService.findTokenByValue(token);
+        UserEntity userEntity = foundToken.getUserEntity();
+        userEntity.setEnabled(true);
+        userService.saveUserEntity(userEntity);
     }
-
-    @PostMapping("/add")
-    public void createUser(UserDTO userDTO) {
-        userService.saveUser(userDTO);
-    }
-
 
     @PostMapping("/resetPassword")
     public void resetPassword(@RequestParam("mail") String email, @RequestParam("newPassword") String newPassword) throws IOException {
-        UserDTO userDTO = userService.findUserByEmail(email);
-        userDTO.setPassword(newPassword);
-        userService.saveUser(userDTO);
-        emailService.sendEmail(email,userDTO.getName(),"Your password has been changed");
+        UserEntity userEntity = userService.findByEmail(email);
+        userEntity.setPassword(newPassword);
+        userService.saveUserEntity(userEntity);
+        emailService.sendEmailWithoutTicket(email,"Password reset confirmation","Your password has been changed");
+        //emailService.sendEmail(email,"Password reset confirmation","Your password has been changed");
     }
 
 

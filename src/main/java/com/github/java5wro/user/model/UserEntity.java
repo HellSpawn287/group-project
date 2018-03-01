@@ -1,5 +1,6 @@
 package com.github.java5wro.user.model;
 
+import com.github.java5wro.user.VerificationToken;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,6 +31,9 @@ public class UserEntity implements UserDetails{
     private String role;
     @Column(name = "enabled")
     private boolean enabled;
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "userEntity")
+    private VerificationToken token;
+
 
 
 
@@ -80,6 +84,10 @@ public class UserEntity implements UserDetails{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override

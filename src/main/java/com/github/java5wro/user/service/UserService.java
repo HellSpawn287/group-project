@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -19,40 +18,24 @@ public class UserService {
     private final PasswordEncoder encoder;
 
     @Autowired
-    public UserService(UserRepository userRepository, PasswordEncoder encoder) {
+    public UserService(UserRepository userRepository,PasswordEncoder encoder) {
         this.userRepository = userRepository;
         this.encoder = encoder;
-//        createSampleUser();
     }
 
     public Set<UserDTO> getAllUsers() {
         return userRepository.findAll().stream().map(u->UserMapper.toUserDTO(u)).collect(Collectors.toSet());
     }
 
-    public UserDTO findUserById(Long id) {
-        return UserMapper.toUserDTO(userRepository.findOne(id));
-    }
-
-    public void saveUser(UserDTO user) {
-
-        UserEntity userEntity = new UserEntity(user.getName(),user.getEmail(),encoder.encode(user.getPassword()),"USER");
+    public void saveUserEntity(UserEntity userEntity) {
+        userEntity.setPassword(encoder.encode(userEntity.getPassword()));
         userRepository.save(userEntity);
     }
 
-    public UserDTO findUserByEmail(String email) {
-        return getAllUsers().stream().filter(u->u.getEmail().equals(email)).findFirst().get();
+    public UserEntity findByEmail(String email) {
+        return userRepository.findOneByEmail(email).get();
     }
 
-    public Optional<UserEntity> findByEmail(String email) {
-        return userRepository.findOneByEmail(email);
-    }
-
-//    private void createSampleUser() {
-//        if (!findByEmail("user@user.pl").isPresent()) {
-//            UserEntity entity = new UserEntity("user@user.pl" ,encoder.encode("user1"),"USER");
-//            userRepository.save(entity);
-//        }
-//    }
 
 
 }
