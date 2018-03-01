@@ -30,6 +30,11 @@ public class TicketService {
         checkArgument(ticketDTO.getUuid() != null, "If ticket is to be edited, it needs it's id to be set.");
         ticketRepository.save(TicketMapper.toTicketEntity(ticketDTO));
     }
+    public void remove (TicketDTO ticketDTO){
+        checkNotNull(ticketDTO, "Ticket to add cannot be null");
+        checkArgument(ticketDTO.getUuid() != null, "If ticket is to be edited, it needs it's id to be set.");
+        ticketRepository.delete(TicketMapper.toTicketEntity(ticketDTO));
+    }
 
     public Set<TicketEntity> findAll() {
        return new HashSet<>(ticketRepository.findAll());

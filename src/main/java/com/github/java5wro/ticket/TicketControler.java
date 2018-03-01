@@ -34,7 +34,7 @@ public class TicketControler {
         return service.findByUser(userService.findByEmail(email).get());
     }
 
-    @GetMapping("byUUID")
+    @GetMapping("byUUID/{uuid}")
     @ResponseBody
     public TicketEntity getTicketsByUUID(@PathVariable String uuid){
         return service.findByUUID(uuid);
@@ -44,9 +44,9 @@ public class TicketControler {
     public void createTicket (TicketDTO ticketDTO){
         service.addNewTicket(ticketDTO);
     }
-    @PostMapping("/editTicket")
-    public void editTicket (TicketDTO ticketDTO){
-        service.edit(ticketDTO);
+    @PostMapping("/editTicket/{uuid}")
+    public void editTicket (@PathVariable String uuid){
+        service.edit(TicketMapper.toTicketDTO(service.findByUUID(uuid)));
     }
 
 
