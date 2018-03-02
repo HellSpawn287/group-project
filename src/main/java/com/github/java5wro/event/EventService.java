@@ -63,4 +63,8 @@ public class EventService {
     public List<EventDto> eventsByName (String name) {
         return toDto(repository.eventsByName(name));
     }
+
+    public List<EventDto> eventsByUuid (Long uuid) {
+        return toDto(repository.eventsByUuid(uuid));
+    }
 }

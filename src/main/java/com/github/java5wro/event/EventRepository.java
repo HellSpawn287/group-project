@@ -14,4 +14,7 @@ public interface EventRepository extends JpaRepository<EventEntity, Long>{
 
     @Query("SELECT e FROM EventEntity e WHERE e.name LIKE CONCAT ('%', :name, '%')")
     List<EventEntity> eventsByName (@Param("name") String name);
+
+    @Query("SELECT e FROM EventEntity e WHERE e.uuid LIKE CONCAT('%', :uuid,'%')")
+    List<EventEntity> eventsByUuid (@Param("uuid") Long uuid);
 }
