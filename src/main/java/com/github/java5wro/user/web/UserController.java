@@ -47,7 +47,11 @@ public class UserController {
         userEntity.setPassword(newPassword);
         userService.saveUserEntity(userEntity);
         emailService.sendEmailWithoutTicket(email,"Password reset confirmation","Your password has been changed");
-        //emailService.sendEmail(email,"Password reset confirmation","Your password has been changed");
+    }
+
+    @PostMapping("/login")
+    public String logIn() {
+        return "You are succesfully logged!";
     }
 
 
