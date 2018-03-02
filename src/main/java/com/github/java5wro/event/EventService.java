@@ -10,6 +10,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 @Service
 public class EventService {
+
     private final EventRepository repository;
 
     public EventService(EventRepository repository) {
@@ -20,12 +21,12 @@ public class EventService {
         return toDto(repository.findAll());
     }
 
-    private EventDto toDto(EventEntity event) {
+    public EventDto toDto(EventEntity event) {
         return new EventDto(event.getId(), event.getUuid(), event.getName(),
                 event.getDescription(), event.getPrice(), event.getAuthor());
     }
 
-    private EventEntity toEntity (EventDto eventDto) {
+    public EventEntity toEntity(EventDto eventDto) {
         return new EventEntity(eventDto.getUuid(), eventDto.getName(), eventDto.getTime(), eventDto.getDescription(),
             eventDto.getPrice(), eventDto.getAuthor());
     }
@@ -42,5 +43,9 @@ public class EventService {
         checkNotNull(event, "Event cannot be null");
         checkArgument(event.getId() == null, "If event is to be added, id has to be null");
         repository.save(event);
+    }
+
+    public List<EventDto> eventsByName (String name) {
+        return toDto(repository.eventsByName(name));
     }
 }

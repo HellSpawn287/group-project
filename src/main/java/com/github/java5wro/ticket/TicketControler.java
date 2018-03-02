@@ -2,13 +2,12 @@ package com.github.java5wro.ticket;
 
 
 import com.github.java5wro.event.EventService;
-import com.github.java5wro.user.model.UserMapper;
 import com.github.java5wro.user.service.UserService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -17,10 +16,12 @@ public class TicketControler {
 
     private final TicketService service;
     private final UserService userService;
+    private EventService eventService;
 
-    public TicketControler(TicketService service, UserService userService) {
+    public TicketControler(TicketService service, UserService userService, EventService eventService) {
         this.service = service;
         this.userService=userService;
+        this.eventService = eventService;
     }
 
     @GetMapping("all")
@@ -31,7 +32,7 @@ public class TicketControler {
 
     @GetMapping("byEmail/{email}")
     @ResponseBody
-    public Set<TicketEntity> getTickets(@PathVariable String email) {
+    public Set<TicketEntity> getTicketsByEmail(@PathVariable String email) {
         return service.findByUser(userService.findByEmail(email).get());
     }
 
@@ -39,6 +40,13 @@ public class TicketControler {
     @ResponseBody
     public TicketEntity getTicketsByUUID(@PathVariable String uuid){
         return service.findByUUID(uuid);
+    }
+
+    @GetMapping("byEventName/{name}")
+    @ResponseBody
+    public Set<TicketEntity> getTicketsByEventName(@PathVariable String name) {
+        return service.findByEvent(eventService.toEntity(eventService.eventsByName(name).
+                stream().filter(e->e.getName().equals(name)).findFirst().get()));
     }
 
     @PostMapping("/addTicket")
@@ -55,4 +63,6 @@ public class TicketControler {
     public void removeTicket (@PathVariable String uuid){
         service.remove(TicketMapper.toTicketDTO(service.findByUUID(uuid)));
     }
+
+
 }

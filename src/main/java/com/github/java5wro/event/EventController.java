@@ -1,6 +1,7 @@
 package com.github.java5wro.event;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +16,12 @@ public class EventController {
 
     @GetMapping
     public Set<EventEntity> getEvents(){
-    return new HashSet<>();      // zwraca JSona
+    return new HashSet<>();
+    }
+
+    @GetMapping("byName/{name}")
+    public Set<EventDto> getEventsByName (@PathVariable String name) {
+        return new HashSet<>(eventService.eventsByName(name));
     }
 
 
