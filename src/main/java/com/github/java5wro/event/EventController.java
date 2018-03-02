@@ -1,10 +1,7 @@
 package com.github.java5wro.event;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +12,16 @@ public class EventController {
 
     @Autowired
     private EventService eventService;
+
+    @GetMapping("byAuthor/{author}")
+    public Set<EventDto> getEventsByAuthor (@PathVariable Long author) {
+        return new HashSet<>(eventService.allEventsByAuthor(author));
+    }
+
+    @GetMapping("byName/{name}")
+    public Set<EventDto> getEventsByName (@PathVariable String name) {
+        return new HashSet<>(eventService.eventsByName(name));
+    }
 
     @GetMapping("")
     public Set<EventDto> getEvents() {

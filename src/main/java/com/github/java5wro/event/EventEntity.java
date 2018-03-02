@@ -1,11 +1,12 @@
 package com.github.java5wro.event;
 
 import com.github.java5wro.ticket.TicketEntity;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
@@ -16,10 +17,8 @@ public class EventEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotBlank
     private String uuid = UUID.randomUUID().toString();
     @NotBlank
-    @Min(2)
     private String name;
     @NotBlank
     @Future
@@ -27,8 +26,10 @@ public class EventEntity {
     @NotNull
     private String description;
     @NotBlank
+    @Range(min = 0)
     private Integer price;
     @NotBlank
+    @Length(min = 2)
     private Long author;
     @OneToMany (mappedBy = "event")
     private List<TicketEntity> participants;

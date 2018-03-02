@@ -9,12 +9,9 @@ import java.util.List;
 
 @Repository
 public interface EventRepository extends JpaRepository<EventEntity, Long>{
-//    @Query(value = "SELECT EventEntity FROM EventEntity e WHERE e.author LIKE CONCAT ('%', _5,'%')")
-//    List<EventEntity> allEventsByAuthor(@Param("author") String author);
-//
-//    @Query(value = "SELECT EventEntity FROM EventEntity WHERE u.username LIKE CONCAT('%',:username,'%')")
-//    List<EventEntity> findUsersWithPartOfName(@Param("username") String username);
-//
-//    @Query(value = "SELECT EventEntity FROM EventEntity WHERE e.name LIKE CONCAT ('%', :name, '%')")
-//    List<EventEntity> eventsByName (@Param("name") String name);
+    @Query("SELECT e FROM EventEntity e WHERE e.author LIKE CONCAT ('%', :author,'%')")
+    List<EventEntity> allEventsByAuthor(@Param("author") Long author);
+
+    @Query("SELECT e FROM EventEntity e WHERE e.name LIKE CONCAT ('%', :name, '%')")
+    List<EventEntity> eventsByName (@Param("name") String name);
 }

@@ -55,4 +55,12 @@ public class EventService {
         checkNotNull(event, "Event cannot be null");
         repository.save(toEntity(event));
     }
+
+    public List<EventDto> allEventsByAuthor (Long author) {
+        return toDto(repository.allEventsByAuthor(author));
+    }
+
+    public List<EventDto> eventsByName (String name) {
+        return toDto(repository.eventsByName(name));
+    }
 }
