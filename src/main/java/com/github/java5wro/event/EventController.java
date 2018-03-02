@@ -3,6 +3,7 @@ package com.github.java5wro.event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,7 +40,7 @@ public class EventController {
     }
 
     @PostMapping("/add")
-    public void addEvent (EventDto eventDto) {
+    public void addEvent (@Valid EventDto eventDto) {
         eventService.addEvent(eventDto);
     }
 
