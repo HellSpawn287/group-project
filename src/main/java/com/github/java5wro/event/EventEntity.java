@@ -1,15 +1,12 @@
 package com.github.java5wro.event;
 
-import com.github.java5wro.ticket.TicketEntity;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.Range;
-
-import javax.persistence.*;
-import javax.validation.constraints.Future;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -17,22 +14,18 @@ public class EventEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotNull
     private String uuid = UUID.randomUUID().toString();
-    @NotBlank
+    @NotNull
     private String name;
-    @NotBlank
-    @Future
+    @NotNull
     private LocalDate time;
     @NotNull
     private String description;
-    @NotBlank
-    @Range(min = 0)
+    @NotNull
     private Integer price;
-    @NotBlank
-    @Length(min = 2)
+    @NotNull
     private Long author;
-    @OneToMany (mappedBy = "event")
-    private List<TicketEntity> participants;
 
     protected EventEntity() {
     }
@@ -43,6 +36,14 @@ public class EventEntity {
         this.time = time;
         this.description = description;
         this.price = price;
+        this.author = author;
+    }
+
+    public Long getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Long author) {
         this.author = author;
     }
 
@@ -92,49 +93,5 @@ public class EventEntity {
 
     public void setPrice(Integer price) {
         this.price = price;
-    }
-
-    public Long getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Long author) {
-        this.author = author;
-    }
-
-    public List<TicketEntity> getParticipants() {
-        return participants;
-    }
-
-    public void setParticipants(List<TicketEntity> participants) {
-        this.participants = participants;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        EventEntity eventEntity = (EventEntity) o;
-
-        if (id != null ? !id.equals(eventEntity.id) : eventEntity.id != null) return false;
-        if (uuid != null ? !uuid.equals(eventEntity.uuid) : eventEntity.uuid != null) return false;
-        if (name != null ? !name.equals(eventEntity.name) : eventEntity.name != null) return false;
-        if (time != null ? !time.equals(eventEntity.time) : eventEntity.time != null) return false;
-        if (description != null ? !description.equals(eventEntity.description) : eventEntity.description != null) return false;
-        if (price != null ? !price.equals(eventEntity.price) : eventEntity.price != null) return false;
-        return author != null ? author.equals(eventEntity.author) : eventEntity.author == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (uuid != null ? uuid.hashCode() : 0);
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (time != null ? time.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (author != null ? author.hashCode() : 0);
-        return result;
     }
 }
