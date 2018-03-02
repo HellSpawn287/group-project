@@ -1,6 +1,7 @@
 package com.github.java5wro.ticket;
 
 
+import com.github.java5wro.event.EventService;
 import com.github.java5wro.user.model.UserMapper;
 import com.github.java5wro.user.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -44,10 +45,14 @@ public class TicketControler {
     public void createTicket (TicketDTO ticketDTO){
         service.addNewTicket(ticketDTO);
     }
+
     @PostMapping("/editTicket/{uuid}")
     public void editTicket (@PathVariable String uuid){
         service.edit(TicketMapper.toTicketDTO(service.findByUUID(uuid)));
     }
 
-
+    @PostMapping("/removeTicket/{uuid}")
+    public void removeTicket (@PathVariable String uuid){
+        service.remove(TicketMapper.toTicketDTO(service.findByUUID(uuid)));
+    }
 }
