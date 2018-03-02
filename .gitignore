@@ -106,3 +106,8 @@ buildNumber.properties
 
 
 # End of https://www.gitignore.io/api/java,maven,intellij
+/src/main/java/com/github/java5wro/ticket/entity/TicketEntity.java
+/src/main/java/com/github/java5wro/ticket/DTO/
+/src/main/java/com/github/java5wro/ticket/entity/
+/src/main/java/com/github/java5wro/ticket/.gitkeep
+/src/main/java/com/github/java5wro/ticket/repository/

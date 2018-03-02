@@ -87,4 +87,46 @@ public class EventDto {
     public void setAuthor(Long author) {
         this.author = author;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        EventDto eventDto = (EventDto) o;
+
+        if (id != null ? !id.equals(eventDto.id) : eventDto.id != null) return false;
+        if (uuid != null ? !uuid.equals(eventDto.uuid) : eventDto.uuid != null) return false;
+        if (name != null ? !name.equals(eventDto.name) : eventDto.name != null) return false;
+        if (time != null ? !time.equals(eventDto.time) : eventDto.time != null) return false;
+        if (description != null ? !description.equals(eventDto.description) : eventDto.description != null)
+            return false;
+        if (price != null ? !price.equals(eventDto.price) : eventDto.price != null) return false;
+        return author != null ? author.equals(eventDto.author) : eventDto.author == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (uuid != null ? uuid.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (time != null ? time.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + (author != null ? author.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "EventDto{" +
+                "id=" + id +
+                ", uuid='" + uuid + '\'' +
+                ", name='" + name + '\'' +
+                ", time=" + time +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", author=" + author +
+                '}';
+    }
 }
