@@ -6,10 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-public class Event {
+public class EventEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -26,10 +27,10 @@ public class Event {
     @NotNull
     private Long author;
 
-    protected Event() {
+    protected EventEntity() {
     }
 
-    public Event(String uuid, String name, LocalDate time, String description, Integer price, Long author) {
+    public EventEntity(String uuid, String name, LocalDate time, String description, Integer price, Long author) {
         this.uuid = uuid;
         this.name = name;
         this.time = time;

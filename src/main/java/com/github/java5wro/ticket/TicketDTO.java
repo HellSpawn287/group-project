@@ -1,27 +1,52 @@
 package com.github.java5wro.ticket;
 
+import com.github.java5wro.event.EventEntity;
+import com.github.java5wro.user.model.UserEntity;
+
+import java.security.acl.Owner;
 import java.time.LocalDate;
 
-/**
- * Created by Lenovo on 2018-02-20.
- */
+
 public class TicketDTO {
 
+    private Integer id;
     private String uuid;
-    private Long event;
+    private EventEntity event;
     private LocalDate purchaseDate;
-    private Long owner;
+    private String owner;
 
     public TicketDTO() {
     }
 
-    public TicketDTO(String uuid, Long event, LocalDate purchaseDate, Long owner) {
+    public TicketDTO(Integer id, String uuid, EventEntity event, LocalDate purchaseDate, String owner) {
+        this.id = id;
         this.uuid = uuid;
         this.event = event;
         this.purchaseDate = purchaseDate;
         this.owner = owner;
     }
 
+    public TicketDTO(Integer id, String uuid, EventEntity event, String owner) {
+        this.id = id;
+        this.uuid = uuid;
+        this.event = event;
+        this.owner = owner;
+    }
+
+    public TicketDTO(Integer id, String uuid, EventEntity event, LocalDate purchaseDate) {
+        this.id = id;
+        this.uuid = uuid;
+        this.event = event;
+        this.purchaseDate = purchaseDate;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getUuid() {
         return uuid;
@@ -31,11 +56,11 @@ public class TicketDTO {
         this.uuid = uuid;
     }
 
-    public Long getEvent() {
+    public EventEntity getEvent() {
         return event;
     }
 
-    public void setEvent(Long event) {
+    public void setEvent(EventEntity event) {
         this.event = event;
     }
 
@@ -47,21 +72,12 @@ public class TicketDTO {
         this.purchaseDate = purchaseDate;
     }
 
-    public Long getOwner() {
+    public String getOwner() {
         return owner;
     }
 
-    public void setOwner(Long owner) {
-        this.owner = owner;
-    }
-
-    @Override
-    public String toString() {
-        return "TicketDTO{" +
-                ", event=" + event +
-                ", purchaseDate=" + purchaseDate +
-                ", owner=" + owner +
-                '}';
+    public void setOwner(UserEntity owner) {
+        this.owner = owner.getName();
     }
 
     @Override
@@ -71,15 +87,32 @@ public class TicketDTO {
 
         TicketDTO ticketDTO = (TicketDTO) o;
 
-        if (uuid != null ? !uuid.equals(ticketDTO.uuid) : ticketDTO.uuid != null) {
+        if (id != null ? !id.equals(ticketDTO.id) : ticketDTO.id != null) return false;
+        if (uuid != null ? !uuid.equals(ticketDTO.uuid) : ticketDTO.uuid != null) return false;
+        if (event != null ? !event.equals(ticketDTO.event) : ticketDTO.event != null) return false;
+        if (purchaseDate != null ? !purchaseDate.equals(ticketDTO.purchaseDate) : ticketDTO.purchaseDate != null)
             return false;
-        }
-        return true;
-
+        return owner != null ? owner.equals(ticketDTO.owner) : ticketDTO.owner == null;
     }
 
     @Override
     public int hashCode() {
-        return uuid.hashCode();
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (uuid != null ? uuid.hashCode() : 0);
+        result = 31 * result + (event != null ? event.hashCode() : 0);
+        result = 31 * result + (purchaseDate != null ? purchaseDate.hashCode() : 0);
+        result = 31 * result + (owner != null ? owner.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "TicketDTO{" +
+                "id=" + id +
+                ", uuid='" + uuid + '\'' +
+                ", event=" + event +
+                ", purchaseDate=" + purchaseDate +
+                ", owner=" + owner +
+                '}';
     }
 }

@@ -2,17 +2,8 @@ package com.github.java5wro.user.model;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-import javax.persistence.*;
+public class UserDTO {
 
-@Entity
-@Table(name = "users")
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    @NotBlank
-    private String uuid;
     @NotBlank
     private String name;
     @NotBlank
@@ -20,32 +11,15 @@ public class User {
     @NotBlank
     private String password;
     @NotBlank
-    private String role;
+    private String confirmPassword;
 
-    protected User(){}
+    public UserDTO() {
+    }
 
-    public User(String uuid, String name, String email, String password, String role) {
-        this.uuid = uuid;
+    public UserDTO(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.role = role;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
     }
 
     public String getName() {
@@ -72,23 +46,20 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
+    public String getConfirmPassword() {
+        return confirmPassword;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", uuid='" + uuid + '\'' +
-                ", name='" + name + '\'' +
+        return "UserDTO{" +
+                "name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
                 '}';
     }
 }
