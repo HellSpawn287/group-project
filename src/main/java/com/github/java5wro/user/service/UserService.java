@@ -39,7 +39,7 @@ public class UserService {
 
     public void saveUser(UserDTO user) {
 
-        UserEntity userEntity = new UserEntity(user.getName(),user.getEmail(),encoder.encode(user.getPassword()),"USER");
+        UserEntity userEntity = new UserEntity(user.getName(),user.getMail(),encoder.encode(user.getPassword()),"USER");
         userRepository.save(userEntity);
     }
 

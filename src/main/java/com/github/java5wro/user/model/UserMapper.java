@@ -1,12 +1,22 @@
 package com.github.java5wro.user.model;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
+import org.mapstruct.ReportingPolicy;
 
-@Mapper(componentModel = "spring")
+import java.util.Collection;
+import java.util.Set;
+
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface UserMapper {
 
-
-    UserEntity toUserEntity(UserDTO userDTO);
-
+    @Mappings({
+            @Mapping(source = "email", target = "mail"),
+            @Mapping(target = "confirmPassword", ignore = true),
+            @Mapping(target = "password", ignore = true)
+    })
     UserDTO toUserDTO(UserEntity userEntity);
+
+    Set<UserDTO> toUserDTO(Collection<UserEntity> userEntities);
 }
