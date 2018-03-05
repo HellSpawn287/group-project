@@ -25,41 +25,44 @@ public class TicketControler {
     }
 
     @GetMapping("all")
-    @ResponseBody
+
     public Set<TicketEntity> getTickets() {
         return new HashSet<>(service.findAll());
     }
 
     @GetMapping("byEmail/{email}")
-    @ResponseBody
+
     public Set<TicketEntity> getTicketsByEmail(@PathVariable String email) {
         return service.findByUser(userService.findByEmail(email).get());
     }
 
     @GetMapping("byUUID/{uuid}")
-    @ResponseBody
+
     public TicketEntity getTicketsByUUID(@PathVariable String uuid){
         return service.findByUUID(uuid);
     }
 
     @GetMapping("byEventName/{name}")
-    @ResponseBody
+
     public Set<TicketEntity> getTicketsByEventName(@PathVariable String name) {
         return service.findByEvent(eventService.toEntity(eventService.eventsByName(name).
                 stream().filter(e->e.getName().equals(name)).findFirst().get()));
     }
 
     @PostMapping("/addTicket")
+    @ResponseBody
     public void createTicket (TicketDTO ticketDTO){
         service.addNewTicket(ticketDTO);
     }
 
     @PostMapping("/editTicket/{uuid}")
+    @ResponseBody
     public void editTicket (@PathVariable String uuid){
         service.edit(TicketMapper.toTicketDTO(service.findByUUID(uuid)));
     }
 
     @PostMapping("/removeTicket/{uuid}")
+    @ResponseBody
     public void removeTicket (@PathVariable String uuid){
         service.remove(TicketMapper.toTicketDTO(service.findByUUID(uuid)));
     }
