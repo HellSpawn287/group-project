@@ -4,6 +4,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
+import java.util.Collection;
+import java.util.Set;
+
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
@@ -11,4 +14,6 @@ public interface UserMapper {
         @Mapping(source = "email", target = "mail")
     })
     UserDTO toUserDTO(UserEntity userEntity);
+
+    Set<UserDTO> toUserDTO(Collection<UserEntity> userEntities);
 }
