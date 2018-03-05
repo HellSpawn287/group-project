@@ -7,7 +7,7 @@ public class UserDTO {
     @NotBlank
     private String name;
     @NotBlank
-    private String email;
+    private String mail;
     @NotBlank
     private String password;
     @NotBlank
@@ -16,9 +16,9 @@ public class UserDTO {
     public UserDTO() {
     }
 
-    public UserDTO(String name, String email, String password) {
+    public UserDTO(String name, String mail, String password) {
         this.name = name;
-        this.email = email;
+        this.mail = mail;
         this.password = password;
     }
 
@@ -30,12 +30,12 @@ public class UserDTO {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getMail() {
+        return mail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public String getPassword() {
@@ -58,7 +58,7 @@ public class UserDTO {
     public String toString() {
         return "UserDTO{" +
                 "name='" + name + '\'' +
-                ", email='" + email + '\'' +
+                ", mail='" + mail + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }
