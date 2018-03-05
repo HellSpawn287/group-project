@@ -13,7 +13,8 @@ public interface UserMapper {
 
     @Mappings({
             @Mapping(source = "email", target = "mail"),
-            @Mapping(target = "confirmPassword", ignore = true)
+            @Mapping(target = "confirmPassword", ignore = true),
+            @Mapping(target = "password", ignore = true)
     })
     UserDTO toUserDTO(UserEntity userEntity);
 
