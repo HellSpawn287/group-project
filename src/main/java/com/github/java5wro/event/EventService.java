@@ -3,6 +3,7 @@ package com.github.java5wro.event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,7 +33,7 @@ public class EventService {
         return eventDtoList.stream().map(this::toEntity).collect(Collectors.toList());
     }
 
-    private List<EventDto> toDto (List<EventEntity> entities) {
+    private List<EventDto> toDto (Collection<EventEntity> entities) {
         return entities.stream().map(this::toDto).collect(Collectors.toList());
     }
 
@@ -57,14 +58,14 @@ public class EventService {
     }
 
     public List<EventDto> allEventsByAuthor (Long author) {
-        return toDto(repository.allEventsByAuthor(author));
+        return toDto(repository.findAllByAuthor(author));
     }
 
     public List<EventDto> eventsByName (String name) {
-        return toDto(repository.eventsByName(name));
+        return toDto(repository.findAllByName(name));
     }
 
-    public List<EventDto> eventsByUuid (Long uuid) {
-        return toDto(repository.eventsByUuid(uuid));
+    public EventDto eventsByUuid (String uuid) {
+        return toDto(repository.findOneByUuid(uuid));
     }
 }

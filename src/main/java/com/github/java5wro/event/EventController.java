@@ -20,8 +20,8 @@ public class EventController {
     }
 
     @GetMapping("byUuid/{uuid}")
-    public Set<EventDto> getEventsByUuid (@PathVariable Long uuid) {
-        return new HashSet<>(eventService.eventsByUuid(uuid));
+    public EventDto getEventsByUuid (@PathVariable String uuid) {
+        return eventService.eventsByUuid(uuid);
     }
 
     @GetMapping("byName/{name}")
