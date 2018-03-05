@@ -7,6 +7,7 @@
     <groupId>com.github.java5wro</groupId>
     <artifactId>group-project</artifactId>
     <version>1.0-SNAPSHOT</version>
+
     <build>
         <plugins>
             <plugin>
@@ -28,6 +29,7 @@
     <properties>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
+        <org.mapstruct.version>1.2.0.Final</org.mapstruct.version>
     </properties>
 
 
@@ -55,6 +57,12 @@
             <artifactId>springfox-swagger2</artifactId>
             <version>2.2.2</version>
             <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.mapstruct</groupId>
+                    <artifactId>mapstruct</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -100,6 +108,20 @@
             <artifactId>guava</artifactId>
             <version>24.0-jre</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-jdk8</artifactId>
+            <version>${org.mapstruct.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>${org.mapstruct.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
 </project>
