@@ -1,5 +1,6 @@
 package com.github.java5wro.event;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,23 +11,19 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 @Service
 public class EventService {
-
     private final EventRepository repository;
 
+    @Autowired
     public EventService(EventRepository repository) {
         this.repository = repository;
     }
 
-    public List<EventDto> findAll (){
-        return toDto(repository.findAll());
+    private EventDto toDto(EventEntity eventEntity) {
+        return new EventDto(eventEntity.getId(), eventEntity.getUuid(), eventEntity.getName(), eventEntity.getTime(),
+                eventEntity.getDescription(), eventEntity.getPrice(), eventEntity.getAuthor());
     }
 
-    public EventDto toDto(EventEntity event) {
-        return new EventDto(event.getId(), event.getUuid(), event.getName(),
-                event.getDescription(), event.getPrice(), event.getAuthor());
-    }
-
-    public EventEntity toEntity(EventDto eventDto) {
+    private EventEntity toEntity (EventDto eventDto) {
         return new EventEntity(eventDto.getUuid(), eventDto.getName(), eventDto.getTime(), eventDto.getDescription(),
             eventDto.getPrice(), eventDto.getAuthor());
     }
@@ -39,13 +36,35 @@ public class EventService {
         return entities.stream().map(this::toDto).collect(Collectors.toList());
     }
 
-    public void addEvent (EventEntity event) {
+    public void addEvent (EventDto eventDto) {
+        checkNotNull(eventDto, "Event cannot be null");
+        checkArgument(eventDto.getId() == null, "If event is to be added, id has to be null");
+        repository.save(toEntity(eventDto));
+    }
+
+    public List<EventDto> findAllEvents (){
+        return toDto(repository.findAll());
+    }
+
+    public void deleteEvent (EventDto event) {
+        checkNotNull(event,"Event does not exist");
+        repository.delete(toEntity(event));
+    }
+
+    public void editEvent (EventDto event) {
         checkNotNull(event, "Event cannot be null");
-        checkArgument(event.getId() == null, "If event is to be added, id has to be null");
-        repository.save(event);
+        repository.save(toEntity(event));
+    }
+
+    public List<EventDto> allEventsByAuthor (Long author) {
+        return toDto(repository.allEventsByAuthor(author));
     }
 
     public List<EventDto> eventsByName (String name) {
         return toDto(repository.eventsByName(name));
+    }
+
+    public List<EventDto> eventsByUuid (Long uuid) {
+        return toDto(repository.eventsByUuid(uuid));
     }
 }

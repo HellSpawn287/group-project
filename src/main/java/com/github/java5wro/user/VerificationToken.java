@@ -1,5 +1,6 @@
 package com.github.java5wro.user;
 
+import com.github.java5wro.user.model.UserEntity;
 import org.apache.tomcat.jni.User;
 
 import javax.persistence.*;
@@ -17,9 +18,8 @@ public class VerificationToken {
 
     private String token;
 
-    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
-    @JoinColumn(nullable = false, name = "user_id")
-    private User user;
+    @OneToOne(fetch = FetchType.EAGER)
+    private UserEntity user;
 
     private Date expiryDate;
 
@@ -30,7 +30,7 @@ public class VerificationToken {
         return new Date(cal.getTime().getTime());
     }
 
-    public VerificationToken(){
+    public VerificationToken() {
 
     }
 
@@ -54,11 +54,11 @@ public class VerificationToken {
         this.token = token;
     }
 
-    public User getUser() {
+    public UserEntity getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserEntity user) {
         this.user = user;
     }
 

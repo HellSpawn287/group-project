@@ -13,14 +13,14 @@ public class InvoiceGenerator {
 
     private  final String FILE_NAME = "invoice.xlsx";
 
-    public  byte[] invoiceGenerator()  {
+    public  byte[] invoiceGenerator(String name, String price, String date )  {
 
 
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet("Invoice data");
         Object[][] invoiceData = {
-                { "Firstname", "Lastname", "Price", "Data"},
-                { "***Firstname***", "***Lastname***", "***Price***", "***Data***"}
+                { "Name and surname", "Price", "Data"},
+                { name, price, date}
         };
 
         int rowNum = 0;
@@ -46,6 +46,7 @@ public class InvoiceGenerator {
         try {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             workbook.write(outputStream);
+            workbook.close();
             return outputStream.toByteArray();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
