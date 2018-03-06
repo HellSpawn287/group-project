@@ -3,8 +3,8 @@ package com.github.java5wro.event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -29,11 +29,15 @@ public class EventService {
             eventDto.getPrice(), eventDto.getAuthor());
     }
 
-    private List<EventEntity> toEntity (List<EventDto> eventDtoList) {
-        return eventDtoList.stream().map(this::toEntity).collect(Collectors.toList());
+    private Set<EventEntity> toEntity (Set<EventDto> eventDtoList) {
+        return eventDtoList.stream().map(this::toEntity).collect(Collectors.toSet());
     }
 
-    private List<EventDto> toDto (Collection<EventEntity> entities) {
+    private Set<EventDto> toDto (Set<EventEntity> entities) {
+        return entities.stream().map(this::toDto).collect(Collectors.toSet());
+    }
+
+    private List<EventDto> toDto (List<EventEntity> entities) {
         return entities.stream().map(this::toDto).collect(Collectors.toList());
     }
 
@@ -57,11 +61,11 @@ public class EventService {
         repository.save(toEntity(event));
     }
 
-    public List<EventDto> allEventsByAuthor (Long author) {
+    public Set<EventDto> allEventsByAuthor (Long author) {
         return toDto(repository.findAllByAuthor(author));
     }
 
-    public List<EventDto> eventsByName (String name) {
+    public Set<EventDto> eventsByName (String name) {
         return toDto(repository.findAllByName(name));
     }
 
