@@ -1,15 +1,32 @@
 package com.github.java5wro.event;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
+
+import javax.persistence.Id;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class EventDto {
+
+    @Id
     private Long id;
-    private String uuid;
+    private String uuid = UUID.randomUUID().toString();
+    @NotBlank
     private String name;
+    @NotBlank
+    @Future
     private LocalDate time;
+    @NotNull
     private String description;
+    @NotBlank
+    @Range(min = 0)
     private Integer price;
+    @NotBlank
+    @Length(min = 2)
     private Long author;
 
     public EventDto(Long id, String uuid, String name, LocalDate time, String description, Integer price, Long author) {
